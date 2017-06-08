@@ -43,6 +43,12 @@ public class Main extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
+        jd_list = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jt_tablaListar = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -65,9 +71,9 @@ public class Main extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(113, 113, 113)
+                .addGap(129, 129, 129)
                 .addComponent(jLabel3)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,6 +168,89 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jPanel5.setBackground(new java.awt.Color(77, 120, 154));
+        jPanel5.setToolTipText("");
+
+        jLabel7.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setText("List of Users");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(334, 334, 334)
+                .addComponent(jLabel7)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel7)
+                .addContainerGap(28, Short.MAX_VALUE))
+        );
+
+        jPanel6.setBackground(new java.awt.Color(34, 36, 48));
+
+        jt_tablaListar.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Date of Birth", "Salary", "Weight(pounds)"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jt_tablaListar);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(92, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 496, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jd_listLayout = new javax.swing.GroupLayout(jd_list.getContentPane());
+        jd_list.getContentPane().setLayout(jd_listLayout);
+        jd_listLayout.setHorizontalGroup(
+            jd_listLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_listLayout.setVerticalGroup(
+            jd_listLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_listLayout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
@@ -198,6 +287,11 @@ public class Main extends javax.swing.JFrame {
         b_insert.setBorderPainted(false);
         b_insert.setContentAreaFilled(false);
         b_insert.setOpaque(true);
+        b_insert.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_insertMouseClicked(evt);
+            }
+        });
 
         b_list.setBackground(new java.awt.Color(245, 67, 55));
         b_list.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
@@ -207,6 +301,11 @@ public class Main extends javax.swing.JFrame {
         b_list.setBorderPainted(false);
         b_list.setContentAreaFilled(false);
         b_list.setOpaque(true);
+        b_list.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_listMouseClicked(evt);
+            }
+        });
 
         b_search.setBackground(new java.awt.Color(245, 67, 55));
         b_search.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
@@ -216,11 +315,6 @@ public class Main extends javax.swing.JFrame {
         b_search.setBorderPainted(false);
         b_search.setContentAreaFilled(false);
         b_search.setOpaque(true);
-        b_search.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                b_searchActionPerformed(evt);
-            }
-        });
 
         b_modify.setBackground(new java.awt.Color(245, 67, 55));
         b_modify.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
@@ -306,14 +400,27 @@ public class Main extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void b_searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_b_searchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_b_searchActionPerformed
-
     private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jButton6MouseClicked
+
+    private void b_insertMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_insertMouseClicked
+        // TODO add your handling code here:
+        this.jd_Insert.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
+        this.jd_Insert.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
+        this.jd_Insert.setLocationRelativeTo(this);
+        this.jd_Insert.setVisible(true);
+        
+    }//GEN-LAST:event_b_insertMouseClicked
+
+    private void b_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_listMouseClicked
+        // TODO add your handling code here:
+        this.jd_list.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
+        this.jd_list.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
+        this.jd_list.setLocationRelativeTo(this);
+        this.jd_list.setVisible(true);
+    }//GEN-LAST:event_b_listMouseClicked
 
     /**
      * @param args the command line arguments
@@ -365,13 +472,19 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JDialog jd_Insert;
+    private javax.swing.JDialog jd_list;
+    private javax.swing.JTable jt_tablaListar;
     // End of variables declaration//GEN-END:variables
 }
