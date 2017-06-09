@@ -57,14 +57,13 @@ public class Main extends javax.swing.JFrame {
         jt_tablaSearch = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
         b_searchUser = new javax.swing.JButton();
-        tf_searchName = new javax.swing.JTextField();
+        cb_search = new javax.swing.JComboBox<>();
         jd_modify = new javax.swing.JDialog();
         jPanel9 = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         b_searchModifyUser = new javax.swing.JButton();
-        tf_searchNameModify = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -74,6 +73,17 @@ public class Main extends javax.swing.JFrame {
         tf_ModifySalary = new javax.swing.JTextField();
         tf_ModifyDate = new javax.swing.JFormattedTextField();
         tf_ModifyWeight = new javax.swing.JTextField();
+        cb_modify = new javax.swing.JComboBox<>();
+        jd_delete = new javax.swing.JDialog();
+        jPanel11 = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
+        jPanel12 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jt_tablaSearch1 = new javax.swing.JTable();
+        jLabel17 = new javax.swing.JLabel();
+        b_searchUser1 = new javax.swing.JButton();
+        cb_search1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -334,10 +344,12 @@ public class Main extends javax.swing.JFrame {
         b_searchUser.setBackground(new java.awt.Color(35, 207, 95));
         b_searchUser.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         b_searchUser.setForeground(new java.awt.Color(255, 255, 255));
-        b_searchUser.setText("Search");
+        b_searchUser.setText("Select");
         b_searchUser.setBorderPainted(false);
         b_searchUser.setContentAreaFilled(false);
         b_searchUser.setOpaque(true);
+
+        cb_search.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", " " }));
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -346,19 +358,19 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(267, 267, 267)
-                                .addComponent(jLabel9))
-                            .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addGap(228, 228, 228)
-                                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(b_searchUser, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                                    .addComponent(tf_searchName))))
-                        .addGap(0, 235, Short.MAX_VALUE))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)))
+                        .addComponent(jScrollPane2))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cb_search, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel8Layout.createSequentialGroup()
+                                    .addGap(267, 267, 267)
+                                    .addComponent(jLabel9))
+                                .addGroup(jPanel8Layout.createSequentialGroup()
+                                    .addGap(228, 228, 228)
+                                    .addComponent(b_searchUser, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 235, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -367,8 +379,8 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel9)
                 .addGap(18, 18, 18)
-                .addComponent(tf_searchName, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addComponent(cb_search, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
                 .addComponent(b_searchUser)
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -423,7 +435,7 @@ public class Main extends javax.swing.JFrame {
         b_searchModifyUser.setBackground(new java.awt.Color(247, 103, 0));
         b_searchModifyUser.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         b_searchModifyUser.setForeground(new java.awt.Color(255, 255, 255));
-        b_searchModifyUser.setText("Search");
+        b_searchModifyUser.setText("Select");
         b_searchModifyUser.setBorderPainted(false);
         b_searchModifyUser.setContentAreaFilled(false);
         b_searchModifyUser.setOpaque(true);
@@ -461,6 +473,8 @@ public class Main extends javax.swing.JFrame {
 
         tf_ModifyWeight.setEnabled(false);
 
+        cb_modify.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", " " }));
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -494,16 +508,16 @@ public class Main extends javax.swing.JFrame {
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(127, 127, 127)
+                        .addComponent(b_saveChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(267, 267, 267)
                         .addComponent(jLabel11))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGap(228, 228, 228)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(b_searchModifyUser, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
-                            .addComponent(tf_searchNameModify)))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(127, 127, 127)
-                        .addComponent(b_saveChanges, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cb_modify, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
@@ -511,9 +525,9 @@ public class Main extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addComponent(tf_searchNameModify, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
+                .addGap(30, 30, 30)
+                .addComponent(cb_modify, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
                 .addComponent(b_searchModifyUser)
                 .addGap(53, 53, 53)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -552,6 +566,137 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel11.setBackground(new java.awt.Color(77, 197, 172));
+        jPanel11.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel11.setToolTipText("");
+
+        jLabel16.setFont(new java.awt.Font("SansSerif", 0, 36)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Delete User");
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(241, 241, 241)
+                .addComponent(jLabel16)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addContainerGap())
+        );
+
+        jPanel12.setBackground(new java.awt.Color(34, 36, 48));
+
+        jt_tablaSearch1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Date of Birth", "Salary", "Weight(pounds)"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jt_tablaSearch1);
+
+        jLabel17.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setText("Type Name:");
+
+        b_searchUser1.setBackground(new java.awt.Color(77, 197, 172));
+        b_searchUser1.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        b_searchUser1.setForeground(new java.awt.Color(255, 255, 255));
+        b_searchUser1.setText("Select");
+        b_searchUser1.setBorderPainted(false);
+        b_searchUser1.setContentAreaFilled(false);
+        b_searchUser1.setOpaque(true);
+
+        cb_search1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", " " }));
+
+        jButton1.setBackground(new java.awt.Color(245, 67, 55));
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Delete");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setOpaque(true);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane3))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cb_search1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel12Layout.createSequentialGroup()
+                                    .addGap(267, 267, 267)
+                                    .addComponent(jLabel17))
+                                .addGroup(jPanel12Layout.createSequentialGroup()
+                                    .addGap(228, 228, 228)
+                                    .addComponent(b_searchUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 204, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 388, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(131, 131, 131))
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel17)
+                .addGap(18, 18, 18)
+                .addComponent(cb_search1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addComponent(b_searchUser1)
+                .addGap(48, 48, 48)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(65, 65, 65))
+        );
+
+        javax.swing.GroupLayout jd_deleteLayout = new javax.swing.GroupLayout(jd_delete.getContentPane());
+        jd_delete.getContentPane().setLayout(jd_deleteLayout);
+        jd_deleteLayout.setHorizontalGroup(
+            jd_deleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jd_deleteLayout.setVerticalGroup(
+            jd_deleteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jd_deleteLayout.createSequentialGroup()
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -646,6 +791,11 @@ public class Main extends javax.swing.JFrame {
         b_delete.setBorderPainted(false);
         b_delete.setContentAreaFilled(false);
         b_delete.setOpaque(true);
+        b_delete.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_deleteMouseClicked(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
@@ -751,6 +901,14 @@ public class Main extends javax.swing.JFrame {
         this.jd_modify.setVisible(true);
     }//GEN-LAST:event_b_modifyMouseClicked
 
+    private void b_deleteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_deleteMouseClicked
+        // TODO add your handling code here:
+        this.jd_delete.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
+        this.jd_delete.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
+        this.jd_delete.setLocationRelativeTo(this);
+        this.jd_delete.setVisible(true);
+    }//GEN-LAST:event_b_deleteMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -795,6 +953,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton b_search;
     private javax.swing.JButton b_searchModifyUser;
     private javax.swing.JButton b_searchUser;
+    private javax.swing.JButton b_searchUser1;
+    private javax.swing.JComboBox<String> cb_modify;
+    private javax.swing.JComboBox<String> cb_search;
+    private javax.swing.JComboBox<String> cb_search1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton6;
     private javax.swing.JFormattedTextField jFormattedTextField1;
@@ -805,6 +968,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -815,6 +980,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -825,20 +992,21 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JDialog jd_Insert;
+    private javax.swing.JDialog jd_delete;
     private javax.swing.JDialog jd_list;
     private javax.swing.JDialog jd_modify;
     private javax.swing.JDialog jd_search;
     private javax.swing.JTable jt_tablaListar;
     private javax.swing.JTable jt_tablaSearch;
+    private javax.swing.JTable jt_tablaSearch1;
     private javax.swing.JFormattedTextField tf_ModifyDate;
     private javax.swing.JTextField tf_ModifyName;
     private javax.swing.JTextField tf_ModifySalary;
     private javax.swing.JTextField tf_ModifyWeight;
-    private javax.swing.JTextField tf_searchName;
-    private javax.swing.JTextField tf_searchNameModify;
     // End of variables declaration//GEN-END:variables
 }
