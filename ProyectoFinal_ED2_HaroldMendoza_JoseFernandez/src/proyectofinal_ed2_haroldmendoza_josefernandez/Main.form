@@ -83,7 +83,7 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_nombreUser" max="32767" attributes="0"/>
                           <Component id="txt_SalarioUser" alignment="0" max="32767" attributes="0"/>
-                          <Component id="txt_PesoUser" alignment="0" max="32767" attributes="0"/>
+                          <Component id="txt_Id" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_RegisterUser" pref="332" max="32767" attributes="0"/>
                           <Component id="jdc_FechaBirth" max="32767" attributes="0"/>
                       </Group>
@@ -109,7 +109,7 @@
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="txt_PesoUser" min="-2" pref="36" max="-2" attributes="0"/>
+                      <Component id="txt_Id" min="-2" pref="36" max="-2" attributes="0"/>
                       <EmptySpace pref="62" max="32767" attributes="0"/>
                       <Component id="btn_RegisterUser" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
@@ -163,10 +163,10 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Weight (pounds)"/>
+                <Property name="text" type="java.lang.String" value="ID"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txt_PesoUser">
+            <Component class="javax.swing.JTextField" name="txt_Id">
             </Component>
             <Component class="javax.swing.JButton" name="btn_RegisterUser">
               <Properties>
@@ -295,10 +295,10 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="0">
+                        <Column editable="false" title="Id" type="java.lang.Integer"/>
                         <Column editable="false" title="Name" type="java.lang.String"/>
                         <Column editable="false" title="Date of Birth" type="java.lang.Object"/>
                         <Column editable="false" title="Salary" type="java.lang.Float"/>
-                        <Column editable="false" title="Weight(pounds)" type="java.lang.Integer"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -436,10 +436,10 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="0">
+                        <Column editable="false" title="Id" type="java.lang.Integer"/>
                         <Column editable="false" title="Name" type="java.lang.String"/>
                         <Column editable="false" title="Date of Birth" type="java.lang.Object"/>
                         <Column editable="false" title="Salary" type="java.lang.Float"/>
-                        <Column editable="false" title="Weight(pounds)" type="java.lang.Integer"/>
                       </Table>
                     </Property>
                   </Properties>
@@ -579,7 +579,7 @@
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tf_ModifyWeight" pref="229" max="32767" attributes="0"/>
+                                  <Component id="tf_ModifyID" pref="229" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -650,7 +650,7 @@
                       <EmptySpace max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="tf_ModifySalary" pref="32" max="32767" attributes="0"/>
-                          <Component id="tf_ModifyWeight" max="32767" attributes="0"/>
+                          <Component id="tf_ModifyID" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="74" max="-2" attributes="0"/>
                       <Component id="b_saveChanges" min="-2" max="-2" attributes="0"/>
@@ -729,7 +729,7 @@
                 <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Weight (pounds)"/>
+                <Property name="text" type="java.lang.String" value="ID"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JButton" name="b_saveChanges">
@@ -759,7 +759,7 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="tf_ModifyWeight">
+            <Component class="javax.swing.JTextField" name="tf_ModifyID">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
@@ -920,10 +920,10 @@
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                       <Table columnCount="4" rowCount="0">
+                        <Column editable="false" title="Id" type="java.lang.Integer"/>
                         <Column editable="false" title="Name" type="java.lang.String"/>
                         <Column editable="false" title="Date of Birth" type="java.lang.Object"/>
                         <Column editable="false" title="Salary" type="java.lang.Float"/>
-                        <Column editable="false" title="Weight(pounds)" type="java.lang.Integer"/>
                       </Table>
                     </Property>
                   </Properties>

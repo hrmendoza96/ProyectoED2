@@ -1,6 +1,9 @@
 package proyectofinal_ed2_haroldmendoza_josefernandez;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -26,7 +29,7 @@ public class Main extends javax.swing.JFrame {
         txt_SalarioUser = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txt_PesoUser = new javax.swing.JTextField();
+        txt_Id = new javax.swing.JTextField();
         btn_RegisterUser = new javax.swing.JButton();
         jdc_FechaBirth = new com.toedter.calendar.JDateChooser();
         jd_list = new javax.swing.JDialog();
@@ -57,7 +60,7 @@ public class Main extends javax.swing.JFrame {
         b_saveChanges = new javax.swing.JButton();
         tf_ModifyName = new javax.swing.JTextField();
         tf_ModifySalary = new javax.swing.JTextField();
-        tf_ModifyWeight = new javax.swing.JTextField();
+        tf_ModifyID = new javax.swing.JTextField();
         cb_modify = new javax.swing.JComboBox<>();
         jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jd_delete = new javax.swing.JDialog();
@@ -120,7 +123,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Weight (pounds)");
+        jLabel6.setText("ID");
 
         btn_RegisterUser.setBackground(new java.awt.Color(51, 157, 143));
         btn_RegisterUser.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
@@ -148,7 +151,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txt_nombreUser)
                     .addComponent(txt_SalarioUser)
-                    .addComponent(txt_PesoUser)
+                    .addComponent(txt_Id)
                     .addComponent(btn_RegisterUser, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
                     .addComponent(jdc_FechaBirth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -171,7 +174,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(28, 28, 28)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
-                .addComponent(txt_PesoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txt_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                 .addComponent(btn_RegisterUser)
                 .addGap(52, 52, 52))
@@ -223,11 +226,11 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Date of Birth", "Salary", "Weight(pounds)"
+                "Id", "Name", "Date of Birth", "Salary"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -306,11 +309,11 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Date of Birth", "Salary", "Weight(pounds)"
+                "Id", "Name", "Date of Birth", "Salary"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -443,7 +446,7 @@ public class Main extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Weight (pounds)");
+        jLabel15.setText("ID");
 
         b_saveChanges.setBackground(new java.awt.Color(245, 67, 55));
         b_saveChanges.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
@@ -457,7 +460,7 @@ public class Main extends javax.swing.JFrame {
 
         tf_ModifySalary.setEnabled(false);
 
-        tf_ModifyWeight.setEnabled(false);
+        tf_ModifyID.setEnabled(false);
 
         cb_modify.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", " " }));
 
@@ -478,7 +481,7 @@ public class Main extends javax.swing.JFrame {
                                 .addGap(149, 149, 149)))
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel15)
-                            .addComponent(tf_ModifyWeight, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
+                            .addComponent(tf_ModifyID, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -530,7 +533,7 @@ public class Main extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tf_ModifySalary, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addComponent(tf_ModifyWeight))
+                    .addComponent(tf_ModifyID))
                 .addGap(74, 74, 74)
                 .addComponent(b_saveChanges)
                 .addGap(107, 107, 107))
@@ -583,11 +586,11 @@ public class Main extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Date of Birth", "Salary", "Weight(pounds)"
+                "Id", "Name", "Date of Birth", "Salary"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.Float.class, java.lang.Integer.class
+                java.lang.Integer.class, java.lang.String.class, java.lang.Object.class, java.lang.Float.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false
@@ -886,11 +889,11 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_b_deleteMouseClicked
 
     private void btn_RegisterUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RegisterUserMouseClicked
-        if ((Integer.parseInt(txt_PesoUser.getText()) < 0) || (Integer.parseInt(txt_SalarioUser.getText()) < 0) || (txt_nombreUser.getText().equals(""))) {
+        if ((Integer.parseInt(txt_Id.getText()) < 0) || (Integer.parseInt(txt_SalarioUser.getText()) < 0) || (txt_nombreUser.getText().equals(""))) {
             JOptionPane.showMessageDialog(this.jd_Insert, "No ha llenado todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
 
-            Person persona = new Person(Integer.parseInt(txt_SalarioUser.getText()), Integer.parseInt(txt_PesoUser.getText()));
+            Person persona = new Person(Integer.parseInt(txt_SalarioUser.getText()), Integer.parseInt(txt_Id.getText()));
 
             //Para pasar el nombre a un arreglo de caracteres
             String cadena = txt_nombreUser.getText();
@@ -900,24 +903,27 @@ public class Main extends javax.swing.JFrame {
                 for (int i = 0; i < size; i++) {
                     nombre[i] = cadena.charAt(i);
                 }//Fin del for
-                persona.setName(nombre);
+                persona.setName(nombre); //se agrega el nombre
                 //Fin
 
                 //Para el date
-                Date nacimiento = jdc_FechaBirth.getDate();
-                int year = nacimiento.getYear();
-                int month = nacimiento.getMonth();
-                int day = nacimiento.getDay();
+                DateFormat df = new SimpleDateFormat("YYYY/MM/dd");      
+                String fechaSeleccionada = df.format(jdc_FechaBirth.getDate());
+                System.out.println("Fecha seleccionada= "+fechaSeleccionada);
+                char[] fecha = new char[10];
                 
-                System.out.println(nacimiento.toString());
-
+                for (int i = 0; i < 10; i++) {
+                    fecha[i] = fechaSeleccionada.charAt(i);
+                }
+                
+                persona.setBirthDate(fecha); //se agrega la persona
                 //Fin del date
             } else {
 
             }//Fin del if
 
         }//Fin del if else
-        this.txt_PesoUser.setText("");
+        this.txt_Id.setText("");
         this.txt_SalarioUser.setText("");
         this.txt_nombreUser.setText("");
     }//GEN-LAST:event_btn_RegisterUserMouseClicked
@@ -1009,10 +1015,10 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable jt_tablaListar;
     private javax.swing.JTable jt_tablaSearch;
     private javax.swing.JTable jt_tablaSearch1;
+    private javax.swing.JTextField tf_ModifyID;
     private javax.swing.JTextField tf_ModifyName;
     private javax.swing.JTextField tf_ModifySalary;
-    private javax.swing.JTextField tf_ModifyWeight;
-    private javax.swing.JTextField txt_PesoUser;
+    private javax.swing.JTextField txt_Id;
     private javax.swing.JTextField txt_SalarioUser;
     private javax.swing.JTextField txt_nombreUser;
     // End of variables declaration//GEN-END:variables

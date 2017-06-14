@@ -11,13 +11,13 @@ package proyectofinal_ed2_haroldmendoza_josefernandez;
  */
 public class Person {
     char[] name=  new char[40];
-    char[] birthDate= new char[8];//YYYY MM DD
+    char[] birthDate= new char[10];//YYYY MM DD
     float salary;
-    int weight; //pounds
+    int id; //pounds
 
-    public Person(float salary, int weight) {
+    public Person(float salary, int id) {
         this.salary = salary;
-        this.weight = weight;
+        this.id = id;
     }
 
     public char[] getName() {
@@ -44,17 +44,17 @@ public class Person {
         this.salary = salary;
     }
 
-    public int getWeight() {
-        return weight;
+    public int getId() {
+        return id;
     }
 
-    public void setWeight(int weight) {
-        this.weight = weight;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
     public String toString() {
-        return "Person{" + "name=" + name + ", birthDate=" + birthDate + ", salary=" + salary + ", weight=" + weight + '}';
+        return "Person{" + "name=" + name + ", birthDate=" + birthDate + ", salary=" + salary + ", id=" + id + '}';
     }
     
     
