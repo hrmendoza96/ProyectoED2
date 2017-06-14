@@ -85,7 +85,7 @@
                           <Component id="txt_SalarioUser" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_PesoUser" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_RegisterUser" pref="332" max="32767" attributes="0"/>
-                          <Component id="jDateChooser1" max="32767" attributes="0"/>
+                          <Component id="jdc_FechaBirth" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -105,7 +105,7 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jDateChooser1" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="jdc_FechaBirth" min="-2" pref="32" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -188,7 +188,7 @@
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_RegisterUserMouseClicked"/>
               </Events>
             </Component>
-            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
+            <Component class="com.toedter.calendar.JDateChooser" name="jdc_FechaBirth">
             </Component>
           </SubComponents>
         </Container>

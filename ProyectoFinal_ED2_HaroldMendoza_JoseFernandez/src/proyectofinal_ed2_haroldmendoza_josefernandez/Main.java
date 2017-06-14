@@ -1,18 +1,16 @@
 package proyectofinal_ed2_haroldmendoza_josefernandez;
 
-import javax.swing.WindowConstants;
-
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
-
 
     public Main() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
-        int x =0;
-    }
-
+        ArrayList<Person> personas = new ArrayList();
+    }//Fin del main
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -30,7 +28,7 @@ public class Main extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         txt_PesoUser = new javax.swing.JTextField();
         btn_RegisterUser = new javax.swing.JButton();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jdc_FechaBirth = new com.toedter.calendar.JDateChooser();
         jd_list = new javax.swing.JDialog();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -152,7 +150,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(txt_SalarioUser)
                     .addComponent(txt_PesoUser)
                     .addComponent(btn_RegisterUser, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jdc_FechaBirth, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -169,7 +167,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jdc_FechaBirth, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
@@ -857,7 +855,6 @@ public class Main extends javax.swing.JFrame {
         this.jd_Insert.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_Insert.setLocationRelativeTo(this);
         this.jd_Insert.setVisible(true);
-        
     }//GEN-LAST:event_b_insertMouseClicked
 
     private void b_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_listMouseClicked
@@ -889,11 +886,41 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_b_deleteMouseClicked
 
     private void btn_RegisterUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_RegisterUserMouseClicked
+        if ((Integer.parseInt(txt_PesoUser.getText()) < 0) || (Integer.parseInt(txt_SalarioUser.getText()) < 0) || (txt_nombreUser.getText().equals(""))) {
+            JOptionPane.showMessageDialog(this.jd_Insert, "No ha llenado todos los campos.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            Person persona = new Person(Integer.parseInt(txt_SalarioUser.getText()), Integer.parseInt(txt_PesoUser.getText()));
+
+            //Para pasar el nombre a un arreglo de caracteres
+            String cadena = txt_nombreUser.getText();
+            int size = cadena.length();
+            if (size <= 40) {
+                char[] nombre = new char[size];
+                for (int i = 0; i < size; i++) {
+                    nombre[i] = cadena.charAt(i);
+                }//Fin del for
+                persona.setName(nombre);
+                //Fin
+
+                //Para el date
+                Date nacimiento = jdc_FechaBirth.getDate();
+                int year = nacimiento.getYear();
+                int month = nacimiento.getMonth();
+                int day = nacimiento.getDay();
+                
+                System.out.println(nacimiento.toString());
+
+                //Fin del date
+            } else {
+
+            }//Fin del if
+
+        }//Fin del if else
         this.txt_PesoUser.setText("");
         this.txt_SalarioUser.setText("");
         this.txt_nombreUser.setText("");
     }//GEN-LAST:event_btn_RegisterUserMouseClicked
-
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -940,7 +967,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_search;
     private javax.swing.JComboBox<String> cb_search1;
     private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -979,6 +1005,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog jd_list;
     private javax.swing.JDialog jd_modify;
     private javax.swing.JDialog jd_search;
+    private com.toedter.calendar.JDateChooser jdc_FechaBirth;
     private javax.swing.JTable jt_tablaListar;
     private javax.swing.JTable jt_tablaSearch;
     private javax.swing.JTable jt_tablaSearch1;
