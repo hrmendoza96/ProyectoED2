@@ -83,9 +83,9 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="txt_nombreUser" max="32767" attributes="0"/>
                           <Component id="txt_SalarioUser" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jFormattedTextField1" alignment="0" max="32767" attributes="0"/>
                           <Component id="txt_PesoUser" alignment="0" max="32767" attributes="0"/>
                           <Component id="btn_RegisterUser" pref="332" max="32767" attributes="0"/>
+                          <Component id="jDateChooser1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -105,8 +105,8 @@
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField1" min="-2" pref="31" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                      <Component id="jDateChooser1" min="-2" pref="32" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="txt_PesoUser" min="-2" pref="36" max="-2" attributes="0"/>
@@ -143,13 +143,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txt_SalarioUser">
-            </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField1">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="yyyy MM dd" subtype="-1" type="1"/>
-                </Property>
-              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -194,6 +187,8 @@
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btn_RegisterUserMouseClicked"/>
               </Events>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser1">
             </Component>
           </SubComponents>
         </Container>
@@ -583,13 +578,9 @@
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                  </Group>
-                                  <Component id="tf_ModifyWeight" max="32767" attributes="0"/>
+                                  <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
+                                  <Component id="tf_ModifyWeight" pref="229" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
@@ -599,11 +590,11 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel13" min="-2" max="-2" attributes="0"/>
-                                  <Component id="tf_ModifyDate" min="-2" pref="220" max="-2" attributes="0"/>
+                                  <Component id="jDateChooser2" min="-2" pref="229" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -641,18 +632,18 @@
                           <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jDateChooser2" max="32767" attributes="0"/>
+                          <Component id="tf_ModifyName" pref="31" max="32767" attributes="0"/>
+                      </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="tf_ModifyName" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Component id="tf_ModifyDate" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                              </Group>
+                          <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                               <Component id="jLabel14" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="82" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -768,14 +759,6 @@
                 <Property name="enabled" type="boolean" value="false"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="tf_ModifyDate">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format format="yyyy MM dd" subtype="-1" type="1"/>
-                </Property>
-                <Property name="enabled" type="boolean" value="false"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="tf_ModifyWeight">
               <Properties>
                 <Property name="enabled" type="boolean" value="false"/>
@@ -793,6 +776,8 @@
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
+            </Component>
+            <Component class="com.toedter.calendar.JDateChooser" name="jDateChooser2">
             </Component>
           </SubComponents>
         </Container>

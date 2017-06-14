@@ -26,11 +26,11 @@ public class Main extends javax.swing.JFrame {
         txt_nombreUser = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txt_SalarioUser = new javax.swing.JTextField();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txt_PesoUser = new javax.swing.JTextField();
         btn_RegisterUser = new javax.swing.JButton();
+        jDateChooser1 = new com.toedter.calendar.JDateChooser();
         jd_list = new javax.swing.JDialog();
         jPanel5 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -59,9 +59,9 @@ public class Main extends javax.swing.JFrame {
         b_saveChanges = new javax.swing.JButton();
         tf_ModifyName = new javax.swing.JTextField();
         tf_ModifySalary = new javax.swing.JTextField();
-        tf_ModifyDate = new javax.swing.JFormattedTextField();
         tf_ModifyWeight = new javax.swing.JTextField();
         cb_modify = new javax.swing.JComboBox<>();
+        jDateChooser2 = new com.toedter.calendar.JDateChooser();
         jd_delete = new javax.swing.JDialog();
         jPanel11 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -116,8 +116,6 @@ public class Main extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Salary");
 
-        jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy MM dd"))));
-
         jLabel5.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Date of Birth");
@@ -152,9 +150,9 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(txt_nombreUser)
                     .addComponent(txt_SalarioUser)
-                    .addComponent(jFormattedTextField1)
                     .addComponent(txt_PesoUser)
-                    .addComponent(btn_RegisterUser, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE))
+                    .addComponent(btn_RegisterUser, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -171,8 +169,8 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel6)
                 .addGap(18, 18, 18)
                 .addComponent(txt_PesoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -461,9 +459,6 @@ public class Main extends javax.swing.JFrame {
 
         tf_ModifySalary.setEnabled(false);
 
-        tf_ModifyDate.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(new java.text.SimpleDateFormat("yyyy MM dd"))));
-        tf_ModifyDate.setEnabled(false);
-
         tf_ModifyWeight.setEnabled(false);
 
         cb_modify.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", " " }));
@@ -484,11 +479,8 @@ public class Main extends javax.swing.JFrame {
                                 .addComponent(tf_ModifySalary)
                                 .addGap(149, 149, 149)))
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addComponent(jLabel15)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(tf_ModifyWeight))
-                        .addGap(77, 77, 77))
+                            .addComponent(jLabel15)
+                            .addComponent(tf_ModifyWeight, javax.swing.GroupLayout.DEFAULT_SIZE, 229, Short.MAX_VALUE)))
                     .addGroup(jPanel10Layout.createSequentialGroup()
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12)
@@ -496,8 +488,8 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
-                            .addComponent(tf_ModifyDate, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(86, 86, 86))))
+                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(77, 77, 77))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -526,16 +518,16 @@ public class Main extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(jLabel13))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tf_ModifyName, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tf_ModifyName, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(tf_ModifyDate, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(55, 55, 55)
                         .addComponent(jLabel14))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
                         .addComponent(jLabel15)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -948,7 +940,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_search;
     private javax.swing.JComboBox<String> cb_search1;
     private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -989,7 +982,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTable jt_tablaListar;
     private javax.swing.JTable jt_tablaSearch;
     private javax.swing.JTable jt_tablaSearch1;
-    private javax.swing.JFormattedTextField tf_ModifyDate;
     private javax.swing.JTextField tf_ModifyName;
     private javax.swing.JTextField tf_ModifySalary;
     private javax.swing.JTextField tf_ModifyWeight;
