@@ -899,12 +899,16 @@ public class Main extends javax.swing.JFrame {
             String cadena = txt_nombreUser.getText();
             int size = cadena.length();
             if (size <= 40) {
+                
                 char[] nombre = new char[size];
+                
                 for (int i = 0; i < size; i++) {
                     nombre[i] = cadena.charAt(i);
                 }//Fin del for
+                
                 persona.setName(nombre); //se agrega el nombre
-                //Fin
+                
+                //Fin de pasar nombre a arreglo de caracteres
 
                 //Para el date
                 DateFormat df = new SimpleDateFormat("YYYY/MM/dd");      
@@ -914,10 +918,12 @@ public class Main extends javax.swing.JFrame {
                 
                 for (int i = 0; i < 10; i++) {
                     fecha[i] = fechaSeleccionada.charAt(i);
-                }
+                }//Fin del for
                 
                 persona.setBirthDate(fecha); //se agrega la persona
                 //Fin del date
+                
+                
             } else {
 
             }//Fin del if
