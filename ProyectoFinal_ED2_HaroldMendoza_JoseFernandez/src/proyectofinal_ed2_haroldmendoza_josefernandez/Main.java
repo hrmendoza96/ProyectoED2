@@ -12,6 +12,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         ArrayList<Person> personas = new ArrayList();
     }//Fin del main
 
