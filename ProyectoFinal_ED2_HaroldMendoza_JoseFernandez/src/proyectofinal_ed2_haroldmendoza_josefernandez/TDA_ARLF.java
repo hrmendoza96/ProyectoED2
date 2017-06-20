@@ -57,27 +57,47 @@ public class TDA_ARLF {
     }
     
     public boolean insert(Person persona) throws IOException{
-        boolean created = false;
         try {
             while(true){
                 if(AvailList.isEmpty()){
                     flujo.seek(archivo.length());
-                }else{
-                    int p = (int) AvailList.remove(0);
-                    flujo.seek(sizeOfRecord*(p-1));
-                    flujo.write(persona.getId());
+                    flujo.writeInt(persona.getId());
                     flujo.writeUTF(persona.getName());
                     flujo.writeUTF(persona.getBirthDate());
                     flujo.writeFloat(persona.getSalary());
-                    created = true;
+                    System.out.println("Hola");
+                    return true;
+                }else{
+                    int p = (int) AvailList.remove(0);
+                    flujo.seek(sizeOfRecord*(p-1));
+                    flujo.writeInt(persona.getId());
+                    flujo.writeUTF(persona.getName());
+                    flujo.writeUTF(persona.getBirthDate());
+                    flujo.writeFloat(persona.getSalary());
+                    System.out.println("Hola2");
+                    return true;
                     
                 }
             }
         } catch (EOFException e) {
             
         }  
-        return created;
+        return false;
     }//fin insert
+    
+    public void listar(){
+        Person persona = new Person();
+        try {
+            while(true){
+                persona.setId(flujo.readInt());
+                persona.setName(flujo.readUTF());
+                persona.setBirthDate(flujo.readUTF());
+                persona.setSalary(flujo.readFloat());
+                System.out.println(persona.toString());
+            }
+        } catch (Exception e) {
+        }
+    }
     
     
     

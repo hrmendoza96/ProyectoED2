@@ -1,9 +1,13 @@
 package proyectofinal_ed2_haroldmendoza_josefernandez;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
@@ -861,10 +865,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_b_insertMouseClicked
 
     private void b_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_listMouseClicked
+       
+        prueba.listar();
         this.jd_list.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_list.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_list.setLocationRelativeTo(this);
         this.jd_list.setVisible(true);
+ 
+        
     }//GEN-LAST:event_b_listMouseClicked
 
     private void b_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_searchMouseClicked
@@ -918,6 +926,13 @@ public class Main extends javax.swing.JFrame {
                 
                 persona.setBirthDate(fecha); //se agrega la persona
                 //Fin del date
+                
+                try {
+                    System.out.println(prueba.insert(persona));
+                } catch (IOException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Ah");
+                }
                 
                 
             } else {
@@ -1025,7 +1040,8 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txt_nombreUser;
     // End of variables declaration//GEN-END:variables
 
-    
+    File archivo = new File("./Hola");
+    TDA_ARLF prueba = new TDA_ARLF(archivo);
 
 
 
