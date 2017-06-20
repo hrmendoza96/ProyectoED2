@@ -1,29 +1,29 @@
 package proyectofinal_ed2_haroldmendoza_josefernandez;
 
 public class Person {
-    char[] name=  new char[40];
-    char[] birthDate= new char[10];//YYYY MM DD
+    String name;//maximo 40 char
+    String birthDate;//YYYY MM DD // maximo 10 char
     float salary;
-    int id; //pounds
+    int id; 
 
     public Person(float salary, int id) {
         this.salary = salary;
         this.id = id;
     }
 
-    public char[] getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(char[] name) {
+    public void setName(String name) {
         this.name = name;
     }
 
-    public char[] getBirthDate() {
+    public String getBirthDate() {
         return birthDate;
     }
 
-    public void setBirthDate(char[] birthDate) {
+    public void setBirthDate(String birthDate) {
         this.birthDate = birthDate;
     }
 

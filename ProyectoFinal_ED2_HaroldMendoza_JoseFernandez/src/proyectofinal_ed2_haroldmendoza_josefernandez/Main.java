@@ -3,8 +3,7 @@ package proyectofinal_ed2_haroldmendoza_josefernandez;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.LinkedList;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
@@ -895,17 +894,15 @@ public class Main extends javax.swing.JFrame {
         } else {
 
             Person persona = new Person(Integer.parseInt(txt_SalarioUser.getText()), Integer.parseInt(txt_Id.getText()));
-
+            
             //Para pasar el nombre a un arreglo de caracteres
             String cadena = txt_nombreUser.getText();
             int size = cadena.length();
             if (size <= 40) {
                 
-                char[] nombre = new char[size];
+                String nombre;
                 
-                for (int i = 0; i < size; i++) {
-                    nombre[i] = cadena.charAt(i);
-                }//Fin del for
+                nombre = cadena;
                 
                 persona.setName(nombre); //se agrega el nombre
                 
@@ -915,11 +912,9 @@ public class Main extends javax.swing.JFrame {
                 DateFormat df = new SimpleDateFormat("YYYY/MM/dd");      
                 String fechaSeleccionada = df.format(jdc_FechaBirth.getDate());
                 System.out.println("Fecha seleccionada= "+fechaSeleccionada);
-                char[] fecha = new char[10];
+                String fecha;
                 
-                for (int i = 0; i < 10; i++) {
-                    fecha[i] = fechaSeleccionada.charAt(i);
-                }//Fin del for
+                fecha = fechaSeleccionada;
                 
                 persona.setBirthDate(fecha); //se agrega la persona
                 //Fin del date
@@ -1029,4 +1024,12 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txt_SalarioUser;
     private javax.swing.JTextField txt_nombreUser;
     // End of variables declaration//GEN-END:variables
+
+    
+
+
+
+
+
+
 }
