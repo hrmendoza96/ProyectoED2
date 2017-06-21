@@ -930,7 +930,6 @@ public class Main extends javax.swing.JFrame {
                 //Para el date
                 DateFormat df = new SimpleDateFormat("YYYY/MM/dd");
                 String fechaSeleccionada = df.format(jdc_FechaBirth.getDate());
-                System.out.println("Fecha seleccionada= " + fechaSeleccionada);
                 String fecha;
 
                 fecha = fechaSeleccionada;
@@ -942,7 +941,6 @@ public class Main extends javax.swing.JFrame {
                     System.out.println(prueba.insert(persona));
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-                    System.out.println("Ah");
                 }
 
             } else {
@@ -982,6 +980,11 @@ public class Main extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this.jd_modify,"Muchos caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
             }
+            JOptionPane.showMessageDialog(this.jd_modify, "Persona modficada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+            this.tf_ModifyID.setText("");
+            this.tf_ModifyName.setText("");
+            this.tf_ModifySalary.setText("");
+       
         }//Fin del if
 
     }//GEN-LAST:event_b_saveChangesMouseClicked
