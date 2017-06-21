@@ -1116,8 +1116,7 @@ public class Main extends javax.swing.JFrame {
                     temp.getName(),
                     temp.getBirthDate(),
                     temp.getSalary()      
-                };
-                
+                };             
                 modelo.addRow(newrow);  
         }
         jt_tablaListar.setModel(modelo);
