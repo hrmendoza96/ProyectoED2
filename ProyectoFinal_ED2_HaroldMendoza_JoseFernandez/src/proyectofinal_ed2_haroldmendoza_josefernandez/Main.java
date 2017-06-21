@@ -1,9 +1,13 @@
 package proyectofinal_ed2_haroldmendoza_josefernandez;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class Main extends javax.swing.JFrame {
@@ -62,7 +66,7 @@ public class Main extends javax.swing.JFrame {
         tf_ModifySalary = new javax.swing.JTextField();
         tf_ModifyID = new javax.swing.JTextField();
         cb_modify = new javax.swing.JComboBox<>();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        jdateModify = new com.toedter.calendar.JDateChooser();
         jd_delete = new javax.swing.JDialog();
         jPanel11 = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
@@ -431,6 +435,11 @@ public class Main extends javax.swing.JFrame {
         b_searchModifyUser.setBorderPainted(false);
         b_searchModifyUser.setContentAreaFilled(false);
         b_searchModifyUser.setOpaque(true);
+        b_searchModifyUser.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_searchModifyUserMouseClicked(evt);
+            }
+        });
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -469,6 +478,8 @@ public class Main extends javax.swing.JFrame {
 
         cb_modify.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", " " }));
 
+        jdateModify.setEnabled(false);
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
@@ -494,7 +505,7 @@ public class Main extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel13)
-                            .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jdateModify, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(77, 77, 77))
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -526,7 +537,7 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jdateModify, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tf_ModifyName, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE))
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
@@ -866,10 +877,14 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_b_insertMouseClicked
 
     private void b_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_listMouseClicked
+
+        prueba.listar();
         this.jd_list.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_list.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_list.setLocationRelativeTo(this);
         this.jd_list.setVisible(true);
+
+
     }//GEN-LAST:event_b_listMouseClicked
 
     private void b_searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_searchMouseClicked
@@ -899,32 +914,37 @@ public class Main extends javax.swing.JFrame {
         } else {
 
             Person persona = new Person(Integer.parseInt(txt_SalarioUser.getText()), Integer.parseInt(txt_Id.getText()));
-            
+
             //Para pasar el nombre a un arreglo de caracteres
             String cadena = txt_nombreUser.getText();
             int size = cadena.length();
             if (size <= 40) {
-                
-                String nombre;
-                
-                nombre = cadena;
-                
-                persona.setName(nombre); //se agrega el nombre
-                
-                //Fin de pasar nombre a arreglo de caracteres
 
+                String nombre;
+
+                nombre = cadena;
+
+                persona.setName(nombre); //se agrega el nombre
+
+                //Fin de pasar nombre a arreglo de caracteres
                 //Para el date
-                DateFormat df = new SimpleDateFormat("YYYY/MM/dd");      
+                DateFormat df = new SimpleDateFormat("YYYY/MM/dd");
                 String fechaSeleccionada = df.format(jdc_FechaBirth.getDate());
-                System.out.println("Fecha seleccionada= "+fechaSeleccionada);
+                System.out.println("Fecha seleccionada= " + fechaSeleccionada);
                 String fecha;
-                
+
                 fecha = fechaSeleccionada;
-                
+
                 persona.setBirthDate(fecha); //se agrega la persona
                 //Fin del date
-                
-                
+
+                try {
+                    System.out.println(prueba.insert(persona));
+                } catch (IOException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Ah");
+                }
+
             } else {
                 JOptionPane.showMessageDialog(this.jd_Insert, "Se presentan muchos caracteres en el nombre.", "Error", JOptionPane.ERROR_MESSAGE);
             }//Fin del if
@@ -936,39 +956,48 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_RegisterUserMouseClicked
 
     private void b_saveChangesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_saveChangesMouseClicked
-        if ((Integer.parseInt(tf_ModifySalary.getText()) < 0) || (Integer.parseInt(tf_ModifyID.getText()) < 0 ) || (tf_ModifyName.getText().equals("")) ) {
+        if ((Integer.parseInt(tf_ModifySalary.getText()) < 0) || (Integer.parseInt(tf_ModifyID.getText()) < 0) || (tf_ModifyName.getText().equals(""))) {
             JOptionPane.showMessageDialog(this.jd_modify, "No ha llenado los campos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            
+
             //Para pasar el nombre a un arreglo de caracteres
             String cadena = txt_nombreUser.getText();
             int size = cadena.length();
             if (size <= 40) {
-                
-                String nombre;
-                
-                nombre = cadena;
-                
-                persona.setName(nombre); //se agrega el nombre
-                
-                //Fin de pasar nombre a arreglo de caracteres
+
+
+                Person persona = (Person) cb_modify.getSelectedItem();
+                persona.setId(Integer.parseInt(tf_ModifyID.getText()));
+                persona.setName(tf_ModifyName.getText());
+                persona.setSalary(Integer.parseInt(tf_ModifySalary.getText()));
 
                 //Para el date
-                DateFormat df = new SimpleDateFormat("YYYY/MM/dd");      
-                String fechaSeleccionada = df.format(jdc_FechaBirth.getDate());
-                System.out.println("Fecha seleccionada= "+fechaSeleccionada);
+                DateFormat df = new SimpleDateFormat("YYYY/MM/dd");
+                String fechaSeleccionada = df.format(jdateModify.getDate());
                 String fecha;
-                
                 fecha = fechaSeleccionada;
-                
                 persona.setBirthDate(fecha); //se agrega la persona
                 //Fin del date
-            } else {
                 
+            } else {
+                JOptionPane.showMessageDialog(this.jd_modify,"Muchos caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }//Fin del if
-            
+
     }//GEN-LAST:event_b_saveChangesMouseClicked
+
+    private void b_searchModifyUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_searchModifyUserMouseClicked
+        System.out.println(cb_modify.getSelectedIndex());
+        if (cb_modify.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this.jd_modify, "No ha seleccionado a ninguna persona.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            this.tf_ModifyID.setEnabled(true);
+            this.tf_ModifyName.setEnabled(true);
+            this.tf_ModifySalary.setEnabled(true);
+            this.jdateModify.setEnabled(true);
+        }//Fin del if
+
+    }//GEN-LAST:event_b_searchModifyUserMouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1015,7 +1044,6 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cb_search;
     private javax.swing.JComboBox<String> cb_search1;
     private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1053,6 +1081,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JDialog jd_list;
     private javax.swing.JDialog jd_modify;
     private javax.swing.JDialog jd_search;
+    private com.toedter.calendar.JDateChooser jdateModify;
     private com.toedter.calendar.JDateChooser jdc_FechaBirth;
     private javax.swing.JTable jt_tablaListar;
     private javax.swing.JTable jt_tablaSearch;
@@ -1065,11 +1094,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txt_nombreUser;
     // End of variables declaration//GEN-END:variables
 
-    
-
-
-
-
-
+    File archivo = new File("./Hola");
+    TDA_ARLF prueba = new TDA_ARLF(archivo);
 
 }
