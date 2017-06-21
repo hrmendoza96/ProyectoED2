@@ -879,7 +879,11 @@ public class Main extends javax.swing.JFrame {
 
     private void b_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_listMouseClicked
 
-        List();
+        try {
+            List();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.jd_list.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_list.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_list.setLocationRelativeTo(this);
@@ -1102,7 +1106,7 @@ public class Main extends javax.swing.JFrame {
 
 
     
-    private void List(){
+    private void List() throws IOException{
         prueba.listar();
         personas = prueba.getListPersonas();
         
@@ -1118,8 +1122,6 @@ public class Main extends javax.swing.JFrame {
                 modelo.addRow(newrow);  
         }
         jt_tablaListar.setModel(modelo);
-        
-        
     }
 
 

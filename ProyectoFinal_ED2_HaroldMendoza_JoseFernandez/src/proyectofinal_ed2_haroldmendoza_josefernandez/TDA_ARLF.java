@@ -99,24 +99,22 @@ public class TDA_ARLF {
         return false;
     }//fin insert
     
-    public void listar(){
-        Person persona = new Person();
+    public void listar() throws IOException{
+        Person persona;
         listPersonas = new ArrayList(); 
         try {
             while(true){
+                persona = new Person();
                 persona.setId(flujo.readInt());
                 persona.setName(flujo.readUTF());
                 persona.setBirthDate(flujo.readUTF());
                 persona.setSalary(flujo.readFloat());
                 listPersonas.add(persona);
                 System.out.println(listPersonas.get(listPersonas.size()-1).toString());
-                
             }
-        } catch (Exception e) {
+        } catch (EOFException e) {
         }
-        for (Object temp : AvailList) {
-            
-        }
+        
     }
 
     
