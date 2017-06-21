@@ -455,6 +455,11 @@ public class Main extends javax.swing.JFrame {
         b_saveChanges.setBorderPainted(false);
         b_saveChanges.setContentAreaFilled(false);
         b_saveChanges.setOpaque(true);
+        b_saveChanges.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_saveChangesMouseClicked(evt);
+            }
+        });
 
         tf_ModifyName.setEnabled(false);
 
@@ -921,7 +926,7 @@ public class Main extends javax.swing.JFrame {
                 
                 
             } else {
-
+                JOptionPane.showMessageDialog(this.jd_Insert, "Se presentan muchos caracteres en el nombre.", "Error", JOptionPane.ERROR_MESSAGE);
             }//Fin del if
 
         }//Fin del if else
@@ -929,6 +934,41 @@ public class Main extends javax.swing.JFrame {
         this.txt_SalarioUser.setText("");
         this.txt_nombreUser.setText("");
     }//GEN-LAST:event_btn_RegisterUserMouseClicked
+
+    private void b_saveChangesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_saveChangesMouseClicked
+        if ((Integer.parseInt(tf_ModifySalary.getText()) < 0) || (Integer.parseInt(tf_ModifyID.getText()) < 0 ) || (tf_ModifyName.getText().equals("")) ) {
+            JOptionPane.showMessageDialog(this.jd_modify, "No ha llenado los campos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            
+            //Para pasar el nombre a un arreglo de caracteres
+            String cadena = txt_nombreUser.getText();
+            int size = cadena.length();
+            if (size <= 40) {
+                
+                String nombre;
+                
+                nombre = cadena;
+                
+                persona.setName(nombre); //se agrega el nombre
+                
+                //Fin de pasar nombre a arreglo de caracteres
+
+                //Para el date
+                DateFormat df = new SimpleDateFormat("YYYY/MM/dd");      
+                String fechaSeleccionada = df.format(jdc_FechaBirth.getDate());
+                System.out.println("Fecha seleccionada= "+fechaSeleccionada);
+                String fecha;
+                
+                fecha = fechaSeleccionada;
+                
+                persona.setBirthDate(fecha); //se agrega la persona
+                //Fin del date
+            } else {
+                
+            }
+        }//Fin del if
+            
+    }//GEN-LAST:event_b_saveChangesMouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
