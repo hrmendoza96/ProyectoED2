@@ -949,7 +949,7 @@ public class Main extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this.jd_Insert, "Se presentan muchos caracteres en el nombre.", "Error", JOptionPane.ERROR_MESSAGE);
             }//Fin del if
-
+            
         }//Fin del if else
         this.txt_Id.setText("");
         this.txt_SalarioUser.setText("");
