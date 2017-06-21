@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -17,7 +18,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
+
     }//Fin del main
 
     @SuppressWarnings("unchecked")
@@ -901,6 +902,7 @@ public class Main extends javax.swing.JFrame {
         this.jd_modify.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_modify.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_modify.setLocationRelativeTo(this);
+        this.ListarCB();
         this.jd_modify.setVisible(true);
     }//GEN-LAST:event_b_modifyMouseClicked
 
@@ -941,7 +943,7 @@ public class Main extends javax.swing.JFrame {
                 //Fin del date
 
                 try {
-                    System.out.println(prueba.insert(persona));
+                    System.out.println(tda.insert(persona));
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -949,7 +951,7 @@ public class Main extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(this.jd_Insert, "Se presentan muchos caracteres en el nombre.", "Error", JOptionPane.ERROR_MESSAGE);
             }//Fin del if
-            
+
         }//Fin del if else
         this.txt_Id.setText("");
         this.txt_SalarioUser.setText("");
@@ -966,7 +968,6 @@ public class Main extends javax.swing.JFrame {
             int size = cadena.length();
             if (size <= 40) {
 
-
                 Person persona = (Person) cb_modify.getSelectedItem();
                 persona.setId(Integer.parseInt(tf_ModifyID.getText()));
                 persona.setName(tf_ModifyName.getText());
@@ -979,15 +980,15 @@ public class Main extends javax.swing.JFrame {
                 fecha = fechaSeleccionada;
                 persona.setBirthDate(fecha); //se agrega la persona
                 //Fin del date
-                
+
             } else {
-                JOptionPane.showMessageDialog(this.jd_modify,"Muchos caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this.jd_modify, "Muchos caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
             }
             JOptionPane.showMessageDialog(this.jd_modify, "Persona modficada correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
             this.tf_ModifyID.setText("");
             this.tf_ModifyName.setText("");
             this.tf_ModifySalary.setText("");
-       
+
         }//Fin del if
 
     }//GEN-LAST:event_b_saveChangesMouseClicked
@@ -1101,32 +1102,32 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     File archivo = new File("./Hola");
-    TDA_ARLF prueba = new TDA_ARLF(archivo);
+    TDA_ARLF tda = new TDA_ARLF(archivo);
     ArrayList<Person> personas = new ArrayList();
 
-
-    
-    private void List() throws IOException{
-        prueba.listar();
-        personas = prueba.getListPersonas();
-        
+    private void List() throws IOException {
+        tda.listar();
+        personas = tda.getListPersonas();
         DefaultTableModel modelo = (DefaultTableModel) jt_tablaListar.getModel();
         for (Person temp : personas) {
             Object[] newrow = {
-                    temp.getId(),
-                    temp.getName(),
-                    temp.getBirthDate(),
-                    temp.getSalary()      
-                };
-                
-                modelo.addRow(newrow);  
+                temp.getId(),
+                temp.getName(),
+                temp.getBirthDate(),
+                temp.getSalary()
+            };
+
+            modelo.addRow(newrow);
         }
         jt_tablaListar.setModel(modelo);
     }
 
-
-
-
-
+    private void ListarCB() {
+        DefaultComboBoxModel modelo = new DefaultComboBoxModel(); //Crea uno nuevo cada vez
+        for (Person temp : personas) {
+            modelo.addElement(temp.getName()); //los pasa con su toString
+        }
+        cb_modify.setModel(modelo);
+    }//Fin del metodo
 
 }
