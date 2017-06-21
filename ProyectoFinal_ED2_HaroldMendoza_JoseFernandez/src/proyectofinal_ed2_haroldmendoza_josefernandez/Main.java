@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class Main extends javax.swing.JFrame {
 
@@ -16,7 +17,7 @@ public class Main extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        ArrayList<Person> personas = new ArrayList();
+        
     }//Fin del main
 
     @SuppressWarnings("unchecked")
@@ -865,12 +866,12 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_b_insertMouseClicked
 
     private void b_listMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_listMouseClicked
-       
-        prueba.listar();
+        List();
         this.jd_list.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_list.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_list.setLocationRelativeTo(this);
         this.jd_list.setVisible(true);
+        
  
         
     }//GEN-LAST:event_b_listMouseClicked
@@ -1042,7 +1043,28 @@ public class Main extends javax.swing.JFrame {
 
     File archivo = new File("./Hola");
     TDA_ARLF prueba = new TDA_ARLF(archivo);
+    ArrayList<Person> personas = new ArrayList();
 
+    
+    private void List(){
+        prueba.listar();
+        personas = prueba.getListPersonas();
+        
+        DefaultTableModel modelo = (DefaultTableModel) jt_tablaListar.getModel();
+        for (Person temp : personas) {
+            Object[] newrow = {
+                    temp.getId(),
+                    temp.getName(),
+                    temp.getBirthDate(),
+                    temp.getSalary()      
+                };
+                
+                modelo.addRow(newrow);  
+        }
+        jt_tablaListar.setModel(modelo);
+        
+        
+    }
 
 
 
