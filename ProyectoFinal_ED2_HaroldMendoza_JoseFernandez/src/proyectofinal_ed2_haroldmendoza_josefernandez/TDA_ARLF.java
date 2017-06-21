@@ -27,6 +27,7 @@ public class TDA_ARLF {
         }
         
     }
+    
 
     public File getArchivo() {
         return archivo;
@@ -61,7 +62,13 @@ public class TDA_ARLF {
         this.listPersonas = listPersonas;
     }
     
-    
+    public void open(){
+        try {
+            flujo = new RandomAccessFile(archivo, "rw");
+        } catch (Exception e) {
+            System.out.println("Archivo no existe");
+        }
+    }
     
     public void close(){
         try {
@@ -79,7 +86,7 @@ public class TDA_ARLF {
                     flujo.writeUTF(persona.getName());
                     flujo.writeUTF(persona.getBirthDate());
                     flujo.writeFloat(persona.getSalary());
-                    System.out.println("Hola");
+                    close();
                     return true;
                 }else{
                     int p = (int) AvailList.remove(0);
@@ -88,7 +95,7 @@ public class TDA_ARLF {
                     flujo.writeUTF(persona.getName());
                     flujo.writeUTF(persona.getBirthDate());
                     flujo.writeFloat(persona.getSalary());
-                    System.out.println("Hola2");
+                    close();
                     return true;
                     
                 }
@@ -100,6 +107,7 @@ public class TDA_ARLF {
     }//fin insert
     
     public void listar() throws IOException{
+        open();
         Person persona;
         listPersonas = new ArrayList(); 
         try {
@@ -115,6 +123,7 @@ public class TDA_ARLF {
         } catch (EOFException e) {
         }
         
+        close();
     }
 
     

@@ -941,7 +941,7 @@ public class Main extends javax.swing.JFrame {
                 //Fin del date
 
                 try {
-                    System.out.println(prueba.insert(persona));
+                    System.out.println(tda.insert(persona));
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -1101,15 +1101,14 @@ public class Main extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     File archivo = new File("./Hola");
-    TDA_ARLF prueba = new TDA_ARLF(archivo);
+    TDA_ARLF tda = new TDA_ARLF(archivo);
     ArrayList<Person> personas = new ArrayList();
 
 
     
     private void List() throws IOException{
-        prueba.listar();
-        personas = prueba.getListPersonas();
-        
+        tda.listar();
+        personas = tda.getListPersonas();
         DefaultTableModel modelo = (DefaultTableModel) jt_tablaListar.getModel();
         for (Person temp : personas) {
             Object[] newrow = {
