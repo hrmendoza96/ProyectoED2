@@ -641,7 +641,7 @@ public class Main extends javax.swing.JFrame {
         b_searchUser1.setContentAreaFilled(false);
         b_searchUser1.setOpaque(true);
 
-        cb_delete.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", " " }));
+        cb_delete.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
         jButton1.setBackground(new java.awt.Color(245, 67, 55));
         jButton1.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
@@ -916,6 +916,7 @@ public class Main extends javax.swing.JFrame {
         this.jd_delete.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_delete.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_delete.setLocationRelativeTo(this);
+        this.ListarCBDelete();
         this.jd_delete.setVisible(true);
     }//GEN-LAST:event_b_deleteMouseClicked
 
@@ -1014,25 +1015,25 @@ public class Main extends javax.swing.JFrame {
 
     private void b_searchUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_searchUserMouseClicked
         // TODO add your handling code here:
-        if(cb_search.getSelectedIndex()==0){
+        if (cb_search.getSelectedIndex() == 0) {
             JOptionPane.showMessageDialog(this.jd_modify, "No ha seleccionado a ninguna persona.", "Error", JOptionPane.ERROR_MESSAGE);
-        }else{
+        } else {
             Person persona = null;
             String nombreAux = (String) cb_search.getSelectedItem();
             for (Person temp : personas) {
-                if((temp.getName()).equals(nombreAux)){
+                if ((temp.getName()).equals(nombreAux)) {
                     persona = temp;
                     break;
                 }//fin if
             }// fin fore
             DefaultTableModel modelo = (DefaultTableModel) jt_tablaSearch.getModel();
             Object[] newrow = {
-                    persona.getId(),
-                    persona.getName(),
-                    persona.getBirthDate(),
-                    persona.getSalary()      
-                };             
-                modelo.addRow(newrow);  
+                persona.getId(),
+                persona.getName(),
+                persona.getBirthDate(),
+                persona.getSalary()
+            };
+            modelo.addRow(newrow);
             jt_tablaSearch.setModel(modelo);
         }//fin else
     }//GEN-LAST:event_b_searchUserMouseClicked
@@ -1142,13 +1143,12 @@ public class Main extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jt_tablaListar.getModel();
         for (Person temp : personas) {
             Object[] newrow = {
-
-                    temp.getId(),
-                    temp.getName(),
-                    temp.getBirthDate(),
-                    temp.getSalary()      
-                };             
-                modelo.addRow(newrow);  
+                temp.getId(),
+                temp.getName(),
+                temp.getBirthDate(),
+                temp.getSalary()
+            };
+            modelo.addRow(newrow);
 
         }
         jt_tablaListar.setModel(modelo);
@@ -1161,7 +1161,7 @@ public class Main extends javax.swing.JFrame {
         }
         cb_modify.setModel(modelo);
     }//Fin del metodo
-    
+
     private void ListarCBSearch() {
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_search.getModel(); //Crea uno nuevo cada vez
         for (Person temp : personas) {
@@ -1170,4 +1170,12 @@ public class Main extends javax.swing.JFrame {
         cb_search.setModel(modelo);
     }//Fin del metodo
 
-}
+    private void ListarCBDelete() {
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_delete.getModel(); //Crea uno nuevo cada vez
+        for (Person temp : personas) {
+            modelo.addElement(temp.getName()); //los pasa con su toString
+        }
+        cb_delete.setModel(modelo);
+    }//Fin del metodo
+
+}//Fin de la clase
