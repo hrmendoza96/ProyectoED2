@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -76,7 +75,7 @@ public class Main extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jt_tablaDelete = new javax.swing.JTable();
         jLabel17 = new javax.swing.JLabel();
-        b_searchUser1 = new javax.swing.JButton();
+        bdelete_User = new javax.swing.JButton();
         cb_delete = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
@@ -633,13 +632,18 @@ public class Main extends javax.swing.JFrame {
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
         jLabel17.setText("Type Name:");
 
-        b_searchUser1.setBackground(new java.awt.Color(77, 197, 172));
-        b_searchUser1.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        b_searchUser1.setForeground(new java.awt.Color(255, 255, 255));
-        b_searchUser1.setText("Select");
-        b_searchUser1.setBorderPainted(false);
-        b_searchUser1.setContentAreaFilled(false);
-        b_searchUser1.setOpaque(true);
+        bdelete_User.setBackground(new java.awt.Color(77, 197, 172));
+        bdelete_User.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        bdelete_User.setForeground(new java.awt.Color(255, 255, 255));
+        bdelete_User.setText("Select");
+        bdelete_User.setBorderPainted(false);
+        bdelete_User.setContentAreaFilled(false);
+        bdelete_User.setOpaque(true);
+        bdelete_User.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bdelete_UserMouseClicked(evt);
+            }
+        });
 
         cb_delete.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
 
@@ -669,7 +673,7 @@ public class Main extends javax.swing.JFrame {
                                     .addComponent(jLabel17))
                                 .addGroup(jPanel12Layout.createSequentialGroup()
                                     .addGap(228, 228, 228)
-                                    .addComponent(b_searchUser1, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(bdelete_User, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 204, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
@@ -685,7 +689,7 @@ public class Main extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(cb_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(44, 44, 44)
-                .addComponent(b_searchUser1)
+                .addComponent(bdelete_User)
                 .addGap(48, 48, 48)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
@@ -933,9 +937,7 @@ public class Main extends javax.swing.JFrame {
             if (size <= 40) {
 
                 String nombre;
-
                 nombre = cadena;
-
                 persona.setName(nombre); //se agrega el nombre
 
                 //Fin de pasar nombre a arreglo de caracteres
@@ -950,7 +952,12 @@ public class Main extends javax.swing.JFrame {
                 //Fin del date
 
                 try {
-                    System.out.println(tda.insert(persona));
+                    boolean creado = tda.insert(persona);
+                    if (creado) {
+                        System.out.println("Se inserto el registro");
+                    } else {
+                        System.out.println("Fallo en ingresar");
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -969,13 +976,14 @@ public class Main extends javax.swing.JFrame {
         if ((Integer.parseInt(tf_ModifySalary.getText()) < 0) || (Integer.parseInt(tf_ModifyID.getText()) < 0) || (tf_ModifyName.getText().equals(""))) {
             JOptionPane.showMessageDialog(this.jd_modify, "No ha llenado los campos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-
             //Para pasar el nombre a un arreglo de caracteres
             String cadena = txt_nombreUser.getText();
             int size = cadena.length();
             if (size <= 40) {
 
-                Person persona = (Person) cb_modify.getSelectedItem();
+                Person persona = null;
+                String nombreAux = (String) cb_search.getSelectedItem();
+                persona = tda.search(nombreAux);
                 persona.setId(Integer.parseInt(tf_ModifyID.getText()));
                 persona.setName(tf_ModifyName.getText());
                 persona.setSalary(Integer.parseInt(tf_ModifySalary.getText()));
@@ -985,7 +993,7 @@ public class Main extends javax.swing.JFrame {
                 String fechaSeleccionada = df.format(jdateModify.getDate());
                 String fecha;
                 fecha = fechaSeleccionada;
-                persona.setBirthDate(fecha); //se agrega la persona
+                persona.setBirthDate(fecha);
                 //Fin del date
 
             } else {
@@ -995,6 +1003,11 @@ public class Main extends javax.swing.JFrame {
             this.tf_ModifyID.setText("");
             this.tf_ModifyName.setText("");
             this.tf_ModifySalary.setText("");
+
+            this.tf_ModifyID.setEnabled(false);
+            this.tf_ModifyName.setEnabled(false);
+            this.tf_ModifySalary.setEnabled(false);
+            this.jdateModify.setEnabled(false);
 
         }//Fin del if
 
@@ -1009,6 +1022,7 @@ public class Main extends javax.swing.JFrame {
             this.tf_ModifyName.setEnabled(true);
             this.tf_ModifySalary.setEnabled(true);
             this.jdateModify.setEnabled(true);
+
         }//Fin del if
 
     }//GEN-LAST:event_b_searchModifyUserMouseClicked
@@ -1026,7 +1040,12 @@ public class Main extends javax.swing.JFrame {
                     break;
                 }//fin if
             }// fin fore
+            persona = tda.search(nombreAux);
+            //insertar a la tabla
             DefaultTableModel modelo = (DefaultTableModel) jt_tablaSearch.getModel();
+            if (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
+            }
             Object[] newrow = {
                 persona.getId(),
                 persona.getName(),
@@ -1037,6 +1056,35 @@ public class Main extends javax.swing.JFrame {
             jt_tablaSearch.setModel(modelo);
         }//fin else
     }//GEN-LAST:event_b_searchUserMouseClicked
+
+    private void bdelete_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bdelete_UserMouseClicked
+        if (cb_delete.getSelectedIndex() == 0) {
+            JOptionPane.showMessageDialog(this.jd_modify, "No ha seleccionado a ninguna persona.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Person persona = null;
+            String nombreAux = (String) cb_delete.getSelectedItem();
+            for (Person temp : personas) {
+                if ((temp.getName()).equals(nombreAux)) {
+                    persona = temp;
+                    break;
+                }//fin if
+            }// fin fore
+            persona = tda.search(nombreAux);
+            //insertar a la tabla
+            DefaultTableModel modelo = (DefaultTableModel) jt_tablaDelete.getModel();
+            if (modelo.getRowCount() > 0) {
+                modelo.removeRow(0);
+            }
+            Object[] newrow = {
+                persona.getId(),
+                persona.getName(),
+                persona.getBirthDate(),
+                persona.getSalary()
+            };
+            modelo.addRow(newrow);
+            jt_tablaDelete.setModel(modelo);
+        }//fin else
+    }//GEN-LAST:event_bdelete_UserMouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1076,7 +1124,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JButton b_search;
     private javax.swing.JButton b_searchModifyUser;
     private javax.swing.JButton b_searchUser;
-    private javax.swing.JButton b_searchUser1;
+    private javax.swing.JButton bdelete_User;
     private javax.swing.JButton btn_Exit;
     private javax.swing.JButton btn_RegisterUser;
     private javax.swing.JComboBox<String> cb_delete;
@@ -1141,6 +1189,13 @@ public class Main extends javax.swing.JFrame {
         tda.listar();
         personas = tda.getListPersonas();
         DefaultTableModel modelo = (DefaultTableModel) jt_tablaListar.getModel();
+        int tamano = modelo.getRowCount();
+        if (tamano > 0) {
+            for (int i = tamano - 1; i >= 0; i--) {
+                modelo.removeRow(i);
+            }//Fin del for            
+        }
+
         for (Person temp : personas) {
             Object[] newrow = {
                 temp.getId(),
@@ -1149,9 +1204,10 @@ public class Main extends javax.swing.JFrame {
                 temp.getSalary()
             };
             modelo.addRow(newrow);
-
         }
+        
         jt_tablaListar.setModel(modelo);
+        
     }
 
     private void ListarCBModificar() {

@@ -125,6 +125,38 @@ public class TDA_ARLF {
         
         close();
     }
+    
+    public Person search(String aux){
+        open();
+        Person persona = null;
+        try {
+            do {
+                persona = new Person();
+                persona.setId(flujo.readInt());
+                persona.setName(flujo.readUTF());
+                persona.setBirthDate(flujo.readUTF());
+                persona.setSalary(flujo.readFloat());
+                
+            } while (!persona.getName().equals(aux));
+            
+        } catch (Exception e) {
+        }
+        close();
+        
+        return persona;
+        
+    }//fin search
+    
+    public boolean modify(Person p){
+        boolean modifico = false;
+        
+        
+        
+        
+        
+        
+        return modifico;
+    } //modify
 
     
 }
