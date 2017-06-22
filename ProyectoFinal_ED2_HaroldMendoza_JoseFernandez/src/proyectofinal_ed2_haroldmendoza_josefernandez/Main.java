@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -932,9 +931,7 @@ public class Main extends javax.swing.JFrame {
             if (size <= 40) {
 
                 String nombre;
-
                 nombre = cadena;
-
                 persona.setName(nombre); //se agrega el nombre
 
                 //Fin de pasar nombre a arreglo de caracteres
@@ -949,7 +946,12 @@ public class Main extends javax.swing.JFrame {
                 //Fin del date
 
                 try {
-                    System.out.println(tda.insert(persona));
+                    boolean creado = tda.insert(persona);
+                    if(creado){ 
+                        System.out.println("Se inserto el registro");
+                    }else{
+                        System.out.println("Fallo en ingresar");
+                    }
                 } catch (IOException ex) {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -968,13 +970,14 @@ public class Main extends javax.swing.JFrame {
         if ((Integer.parseInt(tf_ModifySalary.getText()) < 0) || (Integer.parseInt(tf_ModifyID.getText()) < 0) || (tf_ModifyName.getText().equals(""))) {
             JOptionPane.showMessageDialog(this.jd_modify, "No ha llenado los campos correctamente.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-
             //Para pasar el nombre a un arreglo de caracteres
             String cadena = txt_nombreUser.getText();
             int size = cadena.length();
             if (size <= 40) {
-
-                Person persona = (Person) cb_modify.getSelectedItem();
+                
+                Person persona = null;
+                String nombreAux = (String) cb_search.getSelectedItem();
+                persona = tda.search(nombreAux);
                 persona.setId(Integer.parseInt(tf_ModifyID.getText()));
                 persona.setName(tf_ModifyName.getText());
                 persona.setSalary(Integer.parseInt(tf_ModifySalary.getText()));
@@ -984,8 +987,13 @@ public class Main extends javax.swing.JFrame {
                 String fechaSeleccionada = df.format(jdateModify.getDate());
                 String fecha;
                 fecha = fechaSeleccionada;
-                persona.setBirthDate(fecha); //se agrega la persona
+                persona.setBirthDate(fecha); 
                 //Fin del date
+                
+                
+                
+                
+                
 
             } else {
                 JOptionPane.showMessageDialog(this.jd_modify, "Muchos caracteres.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -994,7 +1002,12 @@ public class Main extends javax.swing.JFrame {
             this.tf_ModifyID.setText("");
             this.tf_ModifyName.setText("");
             this.tf_ModifySalary.setText("");
-
+            
+            this.tf_ModifyID.setEnabled(false);
+            this.tf_ModifyName.setEnabled(false);
+            this.tf_ModifySalary.setEnabled(false);
+            this.jdateModify.setEnabled(false);
+           
         }//Fin del if
 
     }//GEN-LAST:event_b_saveChangesMouseClicked
@@ -1008,6 +1021,7 @@ public class Main extends javax.swing.JFrame {
             this.tf_ModifyName.setEnabled(true);
             this.tf_ModifySalary.setEnabled(true);
             this.jdateModify.setEnabled(true);
+            
         }//Fin del if
 
     }//GEN-LAST:event_b_searchModifyUserMouseClicked
@@ -1019,13 +1033,12 @@ public class Main extends javax.swing.JFrame {
         }else{
             Person persona = null;
             String nombreAux = (String) cb_search.getSelectedItem();
-            for (Person temp : personas) {
-                if((temp.getName()).equals(nombreAux)){
-                    persona = temp;
-                    break;
-                }//fin if
-            }// fin fore
+            persona = tda.search(nombreAux);
+            //insertar a la tabla
             DefaultTableModel modelo = (DefaultTableModel) jt_tablaSearch.getModel();
+            if(modelo.getRowCount()>0){
+                modelo.removeRow(0);
+            }
             Object[] newrow = {
                     persona.getId(),
                     persona.getName(),
@@ -1169,5 +1182,6 @@ public class Main extends javax.swing.JFrame {
         }
         cb_search.setModel(modelo);
     }//Fin del metodo
+    
 
 }
