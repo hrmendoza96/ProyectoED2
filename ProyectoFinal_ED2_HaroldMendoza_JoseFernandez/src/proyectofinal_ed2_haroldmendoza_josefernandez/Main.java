@@ -948,8 +948,14 @@ public class Main extends javax.swing.JFrame {
 
                 fecha = fechaSeleccionada;
 
-                persona.setBirthDate(fecha); //se agrega la persona
-                //Fin del date
+                persona.setBirthDate(fecha); //Fin del date
+                /**
+                 *Se declara el estado del record: 
+                 * '-'-> Disponible
+                 * '*'-> Borrado
+                 */
+                persona.setEstadoRecord('-'); 
+                
 
                 try {
                     boolean creado = tda.insert(persona);
@@ -1181,7 +1187,7 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txt_nombreUser;
     // End of variables declaration//GEN-END:variables
 
-    File archivo = new File("./Hola");
+    File archivo = new File("./Nuevo");
     TDA_ARLF tda = new TDA_ARLF(archivo);
     ArrayList<Person> personas = new ArrayList();
 

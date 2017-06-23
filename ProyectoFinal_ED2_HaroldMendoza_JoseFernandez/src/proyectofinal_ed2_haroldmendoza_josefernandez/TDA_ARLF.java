@@ -13,7 +13,7 @@ public class TDA_ARLF {
     
     private File archivo;
     private RandomAccessFile flujo;
-    private final int sizeOfRecord = Integer.BYTES+Character.BYTES+40+Character.BYTES+10+Float.BYTES;
+    private final int sizeOfRecord = Character.BYTES+1+Integer.BYTES+Character.BYTES+40+Character.BYTES+10+Float.BYTES;
     private final int sizeOfHeader = Integer.BYTES;
     private LinkedList AvailList = new LinkedList();
     ArrayList<Person> listPersonas = new ArrayList();
@@ -82,6 +82,7 @@ public class TDA_ARLF {
             while(true){
                 if(AvailList.isEmpty()){
                     flujo.seek(archivo.length());
+                    flujo.writeChar(persona.getEstadoRecord());
                     flujo.writeInt(persona.getId());
                     flujo.writeUTF(persona.getName());
                     flujo.writeUTF(persona.getBirthDate());
@@ -91,6 +92,7 @@ public class TDA_ARLF {
                 }else{
                     int p = (int) AvailList.remove(0);
                     flujo.seek(sizeOfRecord*(p-1));
+                    flujo.writeChar(persona.getEstadoRecord());
                     flujo.writeInt(persona.getId());
                     flujo.writeUTF(persona.getName());
                     flujo.writeUTF(persona.getBirthDate());
@@ -113,6 +115,7 @@ public class TDA_ARLF {
         try {
             while(true){
                 persona = new Person();
+                persona.setEstadoRecord(flujo.readChar());
                 persona.setId(flujo.readInt());
                 persona.setName(flujo.readUTF());
                 persona.setBirthDate(flujo.readUTF());
@@ -132,6 +135,7 @@ public class TDA_ARLF {
         try {
             do {
                 persona = new Person();
+                persona.setEstadoRecord(flujo.readChar());
                 persona.setId(flujo.readInt());
                 persona.setName(flujo.readUTF());
                 persona.setBirthDate(flujo.readUTF());
@@ -156,7 +160,27 @@ public class TDA_ARLF {
         
         
         return modifico;
-    } //modify
+    } //Fin modify
+    
+    public boolean delete(Person p){
+        open();
+        boolean seBorro=false;
+        Person recordBorrar;
+        
+        try {
+            while(true){
+               recordBorrar = search(p.getName());
+               
+            }
+        } catch (Exception e) {
+        }
+        
+        
+        
+        
+        close(); 
+        return seBorro;
+    }//Fin delete
 
     
 }

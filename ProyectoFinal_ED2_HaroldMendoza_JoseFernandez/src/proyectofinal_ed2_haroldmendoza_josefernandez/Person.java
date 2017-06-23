@@ -1,10 +1,12 @@
 package proyectofinal_ed2_haroldmendoza_josefernandez;
 
 public class Person {
+    char estadoRecord;
     String name;//maximo 40 char
     String birthDate;//YYYY MM DD // maximo 10 char
     float salary;
     int id; 
+    
 
     public Person(float salary, int id) {
         this.salary = salary;
@@ -13,8 +15,15 @@ public class Person {
 
     public Person() {
     }
-    
 
+    public char getEstadoRecord() {
+        return estadoRecord;
+    }
+
+    public void setEstadoRecord(char estadoRecord) {
+        this.estadoRecord = estadoRecord;
+    }
+    
     public String getName() {
         return name;
     }
@@ -49,8 +58,10 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" + "name=" + name + ", birthDate=" + birthDate + ", salary=" + salary + ", id=" + id + '}';
+        return "Person{" + "estadoRecord=" + estadoRecord + ", name=" + name + ", birthDate=" + birthDate + ", salary=" + salary + ", id=" + id + '}';
     }
+
+    
     
     
     
