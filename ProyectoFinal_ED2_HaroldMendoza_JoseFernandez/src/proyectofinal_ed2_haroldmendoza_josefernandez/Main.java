@@ -909,7 +909,11 @@ public class Main extends javax.swing.JFrame {
         this.jd_search.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_search.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_search.setLocationRelativeTo(this);
-        this.ListarCBSearch();
+        try {
+            this.ListarCBSearch();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.jd_search.setVisible(true);
     }//GEN-LAST:event_b_searchMouseClicked
 
@@ -917,7 +921,11 @@ public class Main extends javax.swing.JFrame {
         this.jd_modify.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_modify.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_modify.setLocationRelativeTo(this);
-        this.ListarCBModificar();
+        try {
+            this.ListarCBModificar();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.jd_modify.setVisible(true);
     }//GEN-LAST:event_b_modifyMouseClicked
 
@@ -925,7 +933,11 @@ public class Main extends javax.swing.JFrame {
         this.jd_delete.setModal(true); // cuando las subventas se muestre, bloqueara el frame principal
         this.jd_delete.pack(); //Redimensiona la ventana dependiendo de los controles que tenga en el frame
         this.jd_delete.setLocationRelativeTo(this);
-        this.ListarCBDelete();
+        try {
+            this.ListarCBDelete();
+        } catch (IOException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.jd_delete.setVisible(true);
     }//GEN-LAST:event_b_deleteMouseClicked
 
@@ -1203,6 +1215,7 @@ public class Main extends javax.swing.JFrame {
     Person personaToDelete = null;
 
     private void List() throws IOException {
+        personas = new ArrayList();
         tda.listar();
         personas = tda.getListPersonas();
         DefaultTableModel modelo = (DefaultTableModel) jt_tablaListar.getModel();
@@ -1227,24 +1240,46 @@ public class Main extends javax.swing.JFrame {
         
     }
 
-    private void ListarCBModificar() {
+    private void ListarCBModificar() throws IOException {
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_modify.getModel(); //Crea uno nuevo cada vez
+        //Resetear el modelo
+        modelo.removeAllElements();
+        modelo.addElement('-');     
+        //==================
+        personas=new ArrayList();
+        tda.listar();
+        personas = tda.getListPersonas();
         for (Person temp : personas) {
             modelo.addElement(temp.getName()); //los pasa con su toString
         }
         cb_modify.setModel(modelo);
     }//Fin del metodo
 
-    private void ListarCBSearch() {
+    private void ListarCBSearch() throws IOException {
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_search.getModel(); //Crea uno nuevo cada vez
+        //Resetear el modelo
+        modelo.removeAllElements();
+        modelo.addElement('-');     
+        //==================
+        personas=new ArrayList();
+        tda.listar();
+        personas = tda.getListPersonas();
         for (Person temp : personas) {
             modelo.addElement(temp.getName()); //los pasa con su toString
         }
         cb_search.setModel(modelo);
+        System.out.println(modelo.getSize());
     }//Fin del metodo
 
-    private void ListarCBDelete() {
+    private void ListarCBDelete() throws IOException {
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_delete.getModel(); //Crea uno nuevo cada vez
+        //Resetear el modelo
+        modelo.removeAllElements();
+        modelo.addElement('-');     
+        //==================
+        personas=new ArrayList();
+        tda.listar();
+        personas = tda.getListPersonas();
         for (Person temp : personas) {
             modelo.addElement(temp.getName()); //los pasa con su toString
         }
