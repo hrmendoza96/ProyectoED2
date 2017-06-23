@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.util.ArrayList;
 import java.util.LinkedList;
+import javax.swing.JOptionPane;
 
 
 
@@ -17,6 +18,7 @@ public class TDA_ARLF {
     private final int sizeOfHeader = Integer.BYTES;
     private LinkedList AvailList = new LinkedList();
     ArrayList<Person> listPersonas = new ArrayList();
+    int rrnDelete;
 
     public TDA_ARLF(File archivo) {
         this.archivo = archivo;
@@ -120,8 +122,11 @@ public class TDA_ARLF {
                 persona.setName(flujo.readUTF());
                 persona.setBirthDate(flujo.readUTF());
                 persona.setSalary(flujo.readFloat());
-                listPersonas.add(persona);
-                System.out.println(listPersonas.get(listPersonas.size()-1).toString());
+                if(persona.getEstadoRecord()=='-'){ ///verificar que el record no este marccado como borrado
+                    listPersonas.add(persona);
+                    System.out.println(listPersonas.get(listPersonas.size()-1).toString());
+                }
+                
             }
         } catch (EOFException e) {
         }
@@ -163,24 +168,63 @@ public class TDA_ARLF {
     } //Fin modify
     
     public boolean delete(Person p){
-        open();
+        
         boolean seBorro=false;
         Person recordBorrar;
-        
         try {
-            while(true){
-               recordBorrar = search(p.getName());
-               
-            }
+            recordBorrar = searchForDelete(p.getName());
+               if(recordBorrar.getEstadoRecord()=='*'){
+                   JOptionPane.showMessageDialog(null, "Record was already deleted");
+                   return false;
+               }else{
+                   if((recordBorrar.getName()).equals(p.getName())){
+                   open();
+                   recordBorrar.setEstadoRecord('*'); //se declara borrado
+                   System.out.println("El RRN es:"+rrnDelete);    
+                   //se rescribe el record
+                   flujo.seek(0);
+                   flujo.seek((rrnDelete-1)); 
+                   flujo.writeChar(recordBorrar.getEstadoRecord());
+                   flujo.writeInt(recordBorrar.getId());
+                   flujo.writeUTF(recordBorrar.getName());
+                   flujo.writeUTF(recordBorrar.getBirthDate());
+                   flujo.writeFloat(recordBorrar.getSalary());
+                   //Se agrega al AvailList el registro borrado
+                   AvailList.add(recordBorrar);
+                    close();
+                    return true;
+                    }
+               }
         } catch (Exception e) {
         }
-        
-        
-        
-        
-        close(); 
+         
         return seBorro;
     }//Fin delete
+    
+    
+    public Person searchForDelete(String aux){ //busqueda especial para el metodo delete
+        open();
+        Person persona = null;
+        rrnDelete=0;
+        try {
+            do {
+                persona = new Person();
+                persona.setEstadoRecord(flujo.readChar());
+                persona.setId(flujo.readInt());
+                persona.setName(flujo.readUTF());
+                persona.setBirthDate(flujo.readUTF());
+                persona.setSalary(flujo.readFloat());
+                rrnDelete++;
+                
+            } while (!persona.getName().equals(aux));
+            
+        } catch (Exception e) {
+        }
+        close();
+        
+        return persona;
+        
+    }//fin search
 
     
 }

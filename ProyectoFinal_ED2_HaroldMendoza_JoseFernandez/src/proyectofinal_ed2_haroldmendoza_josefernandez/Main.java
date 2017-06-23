@@ -654,6 +654,11 @@ public class Main extends javax.swing.JFrame {
         jButton1.setBorderPainted(false);
         jButton1.setContentAreaFilled(false);
         jButton1.setOpaque(true);
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -1065,32 +1070,37 @@ public class Main extends javax.swing.JFrame {
 
     private void bdelete_UserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bdelete_UserMouseClicked
         if (cb_delete.getSelectedIndex() == 0) {
-            JOptionPane.showMessageDialog(this.jd_modify, "No ha seleccionado a ninguna persona.", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this.jd_delete, "No ha seleccionado a ninguna persona.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            Person persona = null;
+            
             String nombreAux = (String) cb_delete.getSelectedItem();
             for (Person temp : personas) {
                 if ((temp.getName()).equals(nombreAux)) {
-                    persona = temp;
+                    personaToDelete = temp;
                     break;
                 }//fin if
             }// fin fore
-            persona = tda.search(nombreAux);
+            personaToDelete = tda.search(nombreAux);
             //insertar a la tabla
             DefaultTableModel modelo = (DefaultTableModel) jt_tablaDelete.getModel();
             if (modelo.getRowCount() > 0) {
                 modelo.removeRow(0);
             }
             Object[] newrow = {
-                persona.getId(),
-                persona.getName(),
-                persona.getBirthDate(),
-                persona.getSalary()
+                personaToDelete.getId(),
+                personaToDelete.getName(),
+                personaToDelete.getBirthDate(),
+                personaToDelete.getSalary()
             };
             modelo.addRow(newrow);
             jt_tablaDelete.setModel(modelo);
         }//fin else
     }//GEN-LAST:event_bdelete_UserMouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        boolean seBorro=tda.delete(personaToDelete);
+        JOptionPane.showMessageDialog(this.jd_delete, "Se Borro = "+seBorro);
+    }//GEN-LAST:event_jButton1MouseClicked
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -1190,6 +1200,7 @@ public class Main extends javax.swing.JFrame {
     File archivo = new File("./Nuevo");
     TDA_ARLF tda = new TDA_ARLF(archivo);
     ArrayList<Person> personas = new ArrayList();
+    Person personaToDelete = null;
 
     private void List() throws IOException {
         tda.listar();
