@@ -142,6 +142,32 @@ public class TDA_ARLF {
         close();
     }
     
+    public int listarArbol() throws IOException{
+        open();
+        Person persona;
+        int rrn = 0;
+        listPersonas = new ArrayList(); 
+        try {
+            while(true){
+                persona = new Person();
+                persona.setEstadoRecord(flujo.readChar());
+                persona.setId(flujo.readInt());
+                persona.setName(flujo.readUTF());
+                persona.setBirthDate(flujo.readUTF());
+                persona.setSalary(flujo.readFloat());
+                if(persona.getEstadoRecord()=='-'){ ///verificar que el record no este marccado como borrado
+                    listPersonas.add(persona);
+                }
+                rrn++;
+                
+            }
+        } catch (EOFException e) {
+        }
+        
+        close();
+        return rrn;
+    }
+    
     public Person search(String aux){
         open();
         Person persona = null;

@@ -13,10 +13,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class Main extends javax.swing.JFrame {
 
-    public Main() {
+    public Main() throws IOException {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        boolean cargo= cargarArbolB();
+        System.out.println("Se cargo arbol B="+cargo);
 
     }//Fin del main
 
@@ -1138,7 +1140,11 @@ public class Main extends javax.swing.JFrame {
         //</editor-fold>
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Main().setVisible(true);
+                try {
+                    new Main().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -1209,10 +1215,11 @@ public class Main extends javax.swing.JFrame {
     private javax.swing.JTextField txt_nombreUser;
     // End of variables declaration//GEN-END:variables
 
-    File archivo = new File("./Nuevo");
+    File archivo = new File("./Registros");
     TDA_ARLF tda = new TDA_ARLF(archivo);
     ArrayList<Person> personas = new ArrayList();
     Person personaToDelete = null;
+    ArbolB BTree = new ArbolB(5); //orden=5, keySize = 4
 
     private void List() throws IOException {
         personas = new ArrayList();
@@ -1285,5 +1292,16 @@ public class Main extends javax.swing.JFrame {
         }
         cb_delete.setModel(modelo);
     }//Fin del metodo
+    
+    public boolean cargarArbolB() throws IOException{
+        boolean seCargo=false;
+        personas = new ArrayList();
+        int KeyRRN = tda.listarArbol();
+        personas = tda.getListPersonas();
+        for (Person persona : personas) {
+            BTree.addNodeTree(persona.getId(), KeyRRN);
+        }
+        return seCargo;
+    }
 
 }//Fin de la clase

@@ -12,35 +12,64 @@ import java.util.ArrayList;
  * @author Harold Mendoza
  */
 public class Node {
-    Node father;
-    ArrayList<Node> children = new ArrayList();
+    Node Father;
+    ArrayList<Node> Leftchildren = new ArrayList();
+    ArrayList<Node> Rightchildren = new ArrayList();
+    boolean hasLeftSon;
+    boolean hasRightSon;
     int key;
     int id;
 
     public Node() {
     }
 
-    public Node(Node father, int key, int id) {
-        this.father = father;
+    public Node(int id, int key) {
         this.key = key;
         this.id = id;
     }
 
     public Node getFather() {
-        return father;
+        return Father;
     }
 
-    public void setFather(Node father) {
-        this.father = father;
+    public void setFather(Node Father) {
+        this.Father = Father;
     }
 
-    public ArrayList<Node> getChildren() {
-        return children;
+    public ArrayList<Node> getLeftchildren() {
+        return Leftchildren;
     }
 
-    public void setChildren(ArrayList<Node> children) {
-        this.children = children;
+    public void setLeftchildren(Node Leftchildren) {
+        hasLeftSon=true;
+        this.Leftchildren.add(Leftchildren);
     }
+
+    public ArrayList<Node> getRightchildren() {
+        return Rightchildren;
+    }
+
+    public void setRightchildren(Node Rightchildren) {
+        hasRightSon=true;
+        this.Rightchildren.add(Rightchildren);
+    }
+
+    public boolean HasLeftSon() {
+        return hasLeftSon;
+    }
+
+    public void setHasLeftSon(boolean hasLeftSon) {
+        this.hasLeftSon = hasLeftSon;
+    }
+
+    public boolean HasRightSon() {
+        return hasRightSon;
+    }
+
+    public void setHasRightSon(boolean hasRightSon) {
+        this.hasRightSon = hasRightSon;
+    }
+    
 
     public int getKey() {
         return key;
@@ -60,8 +89,11 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node{" + "father=" + father + ", children=" + children + ", key=" + key + ", id=" + id + '}';
+        return "Node{" + "Father=" + Father + ", Leftchildren=" + Leftchildren + ", Rightchildren=" + Rightchildren + ", key=" + key + ", id=" + id + '}';
     }
+
+  
+
     
     
     
