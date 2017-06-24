@@ -10,5 +10,6 @@ package proyectofinal_ed2_haroldmendoza_josefernandez;
  * @author Harold Mendoza
  */
 public class ArbolB {
+    Node root;
     
 }
