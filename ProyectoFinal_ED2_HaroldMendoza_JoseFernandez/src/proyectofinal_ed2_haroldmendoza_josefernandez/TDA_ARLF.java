@@ -14,7 +14,7 @@ public class TDA_ARLF {
     
     private File archivo;
     private RandomAccessFile flujo;
-    private final int sizeOfRecord = Character.BYTES+1+Integer.BYTES+Character.BYTES+40+Character.BYTES+10+Float.BYTES;
+    private final int sizeOfRecord = (Character.BYTES+1)+Integer.BYTES+(Character.BYTES+40)+(Character.BYTES+10)+Float.BYTES;
     private final int sizeOfHeader = Integer.BYTES;
     private LinkedList AvailList = new LinkedList();
     ArrayList<Person> listPersonas = new ArrayList();
@@ -24,6 +24,8 @@ public class TDA_ARLF {
         this.archivo = archivo;
         try {
             flujo = new RandomAccessFile(archivo, "rw");
+            llenarAvailList();
+            
         } catch (Exception e) {
             System.out.println("Archivo no existe");
         }
@@ -80,9 +82,13 @@ public class TDA_ARLF {
     }
     
     public boolean insert(Person persona) throws IOException{
+        open();
+        int rrn=0;
         try {
             while(true){
+                rrn++;
                 if(AvailList.isEmpty()){
+                    
                     flujo.seek(archivo.length());
                     flujo.writeChar(persona.getEstadoRecord());
                     flujo.writeInt(persona.getId());
@@ -92,8 +98,9 @@ public class TDA_ARLF {
                     close();
                     return true;
                 }else{
-                    int p = (int) AvailList.remove(0);
-                    flujo.seek(sizeOfRecord*(p-1));
+                    flujo.seek(0);
+                    AvailList.remove(0);
+                    flujo.seek(sizeOfRecord*(rrn-1));
                     flujo.writeChar(persona.getEstadoRecord());
                     flujo.writeInt(persona.getId());
                     flujo.writeUTF(persona.getName());
@@ -103,6 +110,7 @@ public class TDA_ARLF {
                     return true;
                     
                 }
+                
             }
         } catch (EOFException e) {
             
@@ -183,14 +191,21 @@ public class TDA_ARLF {
                    System.out.println("El RRN es:"+rrnDelete);    
                    //se rescribe el record
                    flujo.seek(0);
-                   flujo.seek((rrnDelete-1)); 
+                   flujo.seek((rrnDelete-1)*sizeOfRecord); 
                    flujo.writeChar(recordBorrar.getEstadoRecord());
                    flujo.writeInt(recordBorrar.getId());
                    flujo.writeUTF(recordBorrar.getName());
                    flujo.writeUTF(recordBorrar.getBirthDate());
                    flujo.writeFloat(recordBorrar.getSalary());
                    //Se agrega al AvailList el registro borrado
-                   AvailList.add(recordBorrar);
+                   // AvailList.add(recordBorrar);
+                       System.out.println("Probando Availist");
+                       
+                       for (Object object : AvailList) {
+                           String x = object.toString();
+                           System.out.println(x);
+                       }
+                    
                     close();
                     return true;
                     }
@@ -225,6 +240,33 @@ public class TDA_ARLF {
         return persona;
         
     }//fin search
+    
+    public void llenarAvailList() throws IOException{
+        
+        Person persona;
+        listPersonas = new ArrayList(); 
+        try {
+            while(true){
+                persona = new Person();
+                persona.setEstadoRecord(flujo.readChar());
+                persona.setId(flujo.readInt());
+                persona.setName(flujo.readUTF());
+                persona.setBirthDate(flujo.readUTF());
+                persona.setSalary(flujo.readFloat());
+                if(persona.getEstadoRecord()=='*'){ ///verificar que el record este borrado
+                    AvailList.add(persona);
+                    System.out.println("Personas en el Availist");
+                }
+                
+            }
+        } catch (EOFException e) {
+        }
+        
+        for (Object object : AvailList) {
+            System.out.println(object.toString());
+        }
+        
+    }
 
     
 }
