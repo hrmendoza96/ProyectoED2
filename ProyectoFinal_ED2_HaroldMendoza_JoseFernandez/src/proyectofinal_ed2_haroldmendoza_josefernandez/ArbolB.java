@@ -121,6 +121,7 @@ public class ArbolB {
         if (pos % 2 != 0) { //obtener la mediana para hacer el split correspondiente
             pos++;
         }
+        
         Node newFather = temp2.get(pos); //se establece quien sera el nuevo padre de todos
         //Se declaran los hijos del nodo padre
         for (int i = 0; i < temp2.size(); i++) {
@@ -171,4 +172,8 @@ public class ArbolB {
 
     }
 
-}
+    public int searchNode() {
+        return 0;
+    }//Fin del searchNode
+    
+}//Fin de la clase

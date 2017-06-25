@@ -12,13 +12,16 @@ import java.util.ArrayList;
  * @author Harold Mendoza
  */
 public class Node {
+    
     Node Father;
     ArrayList<Node> Leftchildren = new ArrayList();
     ArrayList<Node> Rightchildren = new ArrayList();
     boolean hasLeftSon;
     boolean hasRightSon;
-    int key;
-    int id;
+    int key; //el rrn del archivo
+    int id; //el que ingresa el usuario
+    
+    //El rrn lo usamos en el search y encontramos el archivo
 
     public Node() {
     }
