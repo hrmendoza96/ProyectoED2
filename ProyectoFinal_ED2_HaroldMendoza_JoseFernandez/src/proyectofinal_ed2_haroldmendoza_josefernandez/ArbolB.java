@@ -63,13 +63,13 @@ public class ArbolB {
         Node hasLeftAuxNode = null;
         Node hasRightAuxNode = null;
         for (Node node : root) {
-            if (node.getId() > nuevo.getId()) {
+            if (node.getId() > nuevo.getId()) { //si el nuevo nodo es menor que el nodo evaluandose
                 if (node.hasLeftSon) {
                     NodeGoesLeftSon = true;
                     hasLeftAuxNode = node; //guarda el valor del nodo para utilizarlo despues
                     break;
                 }
-            } else if (node.getId() < nuevo.getId()) {
+            } else if (node.getId() < nuevo.getId()) { //si el nuevo nodo es mayor que el nodo evaluandose
                 if (node.hasRightSon) {
                     NodeGoesRightSon = true;
                     hasRightAuxNode = node; //guarda el valor del nodo para utilizarlo despues
@@ -117,11 +117,13 @@ public class ArbolB {
                 }
             }
         } else if (root.size() == keySize) {//verifica si la root esta llena
+            //System.out.println(root.size());
             nuevo = new Node(id, key); //creamos el nuevo nodo
             splitAndInsert(nuevo);
             actualizarBranches();
             seInserto = true;
         } else { //si el arrayList aun no se ha llenado
+            //System.out.println("Llenando la root normal");
             root.add(new Node(id, key));
             sort();
             actualizarBranches();
@@ -161,23 +163,30 @@ public class ArbolB {
 
     //================================SPLIT AND INSERT=============================
     public void splitAndInsert(Node nuevo) {
+        //System.out.println("va haber split");
         ArrayList<Node> temp = root;
         temp.add(nuevo);
         ArrayList<Node> temp2 = new ArrayList();
         temp2 = sortOtherArrays(temp);
-        int pos = (temp2.size() / 2);
-        if (pos % 2 != 0) { //obtener la mediana para hacer el split correspondiente
-            pos++;
+        int pos = (temp2.size() / 2); //La media se obtiene de manera automatica para numeros impares al dividir entre 2. Ya que la posicion en el arraylsit es la mitad-1
+        if(pos%2==0){
+            pos--; //cuando es par se le resta 1 ya que en el arraylist la posicion es la mitad -1
         }
+        //System.out.println("Pos="+pos);
+        //System.out.println("temp2.get(pos)="+temp2.get(pos).toString());
 
         Node newFather = temp2.get(pos); //se establece quien sera el nuevo padre de todos
         //Se declaran los hijos del nodo padre
+        //System.out.println("Temp2 size="+temp2.size());
+       
         for (int i = 0; i < temp2.size(); i++) {
             if (i < pos) {//hijo menor
+                //System.out.println("menor"+i);
                 temp2.get(i).setFather(newFather);
                 newFather.setLeftchildren(temp2.get(i));
             } else if (i > pos) {//hijo mayor
-                temp2.get(i).setFather(newFather);
+                //System.out.println("mayor"+i);
+                temp2.get(i-1).setFather(newFather);
                 newFather.setRightchildren(temp2.get(i));
             }
         }
@@ -193,7 +202,7 @@ public class ArbolB {
             public int compare(Node o1, Node o2) {
                 String id1 = o1.getId() + "";
                 String id2 = o2.getId() + "";
-                return id2.compareTo(id1);
+                return id1.compareTo(id2);
             }
         });
         return temp;
@@ -207,7 +216,7 @@ public class ArbolB {
             public int compare(Node o1, Node o2) {
                 String id1 = o1.getId() + "";
                 String id2 = o2.getId() + "";
-                return id2.compareTo(id1);
+                return id1.compareTo(id2);
             }
         });
     }
@@ -220,7 +229,18 @@ public class ArbolB {
 
     }
 
-    public void printArbol() {
+    public void printArbol(ArrayList<Node> root) {
+        for (Node node : root) {
+            System.out.println(node.toString());
+            if(node.HasLeftSon()){
+                System.out.println("Left Sons of :"+node.getId());
+                printArbol(node.getLeftchildren());
+            }
+            if(node.HasRightSon()){
+                System.out.println("Right Sons of :"+node.getId());
+                printArbol(node.getRightchildren());
+            }
+        }
 
     }
 
@@ -245,5 +265,8 @@ public class ArbolB {
         */
         return 0;
     }//Fin del searchNode
+    
+    //=========================To String=======================================
+    
 
 }//Fin de la clase

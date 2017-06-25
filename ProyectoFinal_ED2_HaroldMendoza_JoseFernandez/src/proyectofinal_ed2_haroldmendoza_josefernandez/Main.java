@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -1219,7 +1221,7 @@ public class Main extends javax.swing.JFrame {
     TDA_ARLF tda = new TDA_ARLF(archivo);
     ArrayList<Person> personas = new ArrayList();
     Person personaToDelete = null;
-    ArbolB BTree = new ArbolB(5); //orden=5, keySize = 4
+    ArbolB BTree = new ArbolB(3); //orden=5, keySize = 4
 
     private void List() throws IOException {
         personas = new ArrayList();
@@ -1246,6 +1248,8 @@ public class Main extends javax.swing.JFrame {
         jt_tablaListar.setModel(modelo);
         
     }
+    
+
 
     private void ListarCBModificar() throws IOException {
         DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_modify.getModel(); //Crea uno nuevo cada vez
@@ -1298,11 +1302,26 @@ public class Main extends javax.swing.JFrame {
         personas = new ArrayList();
         int KeyRRN = tda.listarArbol();
         personas = tda.getListPersonas();
-        for (Person persona : personas) {
+        ArrayList<Person> temp;
+        temp = sortOtherArrays(personas);
+        for (Person persona : temp) {
             BTree.addNodeTree(persona.getId(), KeyRRN);
             seCargo=true;
         }
+        BTree.printArbol(BTree.getRoot());
         return seCargo;
+    }
+    
+        public ArrayList<Person> sortOtherArrays(ArrayList temp) { //se realiza el sort del arrayList para el split
+        Collections.sort(temp, new Comparator<Person>() {
+            @Override
+            public int compare(Person o1, Person o2) {
+                String id1 = o1.getId() + "";
+                String id2 = o2.getId() + "";
+                return id1.compareTo(id2);
+            }
+        });
+        return temp;
     }
 
 }//Fin de la clase

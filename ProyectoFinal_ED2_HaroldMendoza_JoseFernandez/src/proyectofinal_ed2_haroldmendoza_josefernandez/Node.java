@@ -96,8 +96,10 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node{" + "Father=" + Father + ", Leftchildren=" + Leftchildren + ", Rightchildren=" + Rightchildren + ", key=" + key + ", id=" + id + '}';
+        return "Node{" + "key=" + key + ", id=" + id + '}';
     }
+
+   
 
   
 
