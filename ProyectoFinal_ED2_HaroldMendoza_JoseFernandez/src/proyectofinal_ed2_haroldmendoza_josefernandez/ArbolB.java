@@ -86,9 +86,14 @@ public class ArbolB {
                     tree.setRoot(node.getLeftchildren());
                     tree.addNodeTree(nuevo.getId(), nuevo.getKey());
                     if(node.getLeftchildren().size()==1){ //Si se ha quedado solo con un hijo, este hijo debe subir a formar parte del padre
-                        
+                        for (Node temp : node.getLeftchildren().get(0).getRightchildren()) {
+                            node.Leftchildren = new ArrayList();
+                            node.setLeftchildren(temp);
+                        }
+                        InsertarAfterUnderSplit(node); 
                         
                     }
+                    actualizarBranches();
                     seInserto = true;
                     break;
                 }
@@ -104,10 +109,9 @@ public class ArbolB {
                             node.Rightchildren = new ArrayList();
                             node.setRightchildren(temp);
                         }
-                        addNodeTree(node.getRightchildren().get(0).getId(), node.getRightchildren().get(0).getKey());
-                        
-                        
+                        InsertarAfterUnderSplit(node); 
                     }
+                    actualizarBranches();
                     seInserto = true;
                     break;
                 }
@@ -115,14 +119,44 @@ public class ArbolB {
         } else if (root.size() == keySize) {//verifica si la root esta llena
             nuevo = new Node(id, key); //creamos el nuevo nodo
             splitAndInsert(nuevo);
+            actualizarBranches();
             seInserto = true;
         } else { //si el arrayList aun no se ha llenado
             root.add(new Node(id, key));
             sort();
+            actualizarBranches();
             seInserto = true;
         }
 
         return seInserto;
+    }
+    
+    public void InsertarAfterUnderSplit(Node nodo){
+        if(root.size()==keySize){
+            splitAndInsert(nodo);
+            actualizarBranches();
+        }else{
+            root.add(nodo);
+            sort();
+            actualizarBranches();
+        }
+    }
+    
+    public void actualizarBranches(){
+        branches = new ArrayList();
+        for (Node node : root) {
+            if(node.HasLeftSon()){
+                if(!branches.contains(node.Leftchildren)){
+                    branches.add(node.Leftchildren);
+                }
+                    
+            }
+            if(node.HasRightSon()){
+                if(!branches.contains(node.Rightchildren)){
+                    branches.add(node.Rightchildren);
+                }
+            }
+        }
     }
 
     //================================SPLIT AND INSERT=============================
@@ -183,6 +217,10 @@ public class ArbolB {
 
         return seBorro;
 
+    }
+    
+    public void printArbol(){
+        
     }
 
 }
