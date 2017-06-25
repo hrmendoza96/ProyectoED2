@@ -16,6 +16,7 @@ import java.util.Comparator;
 public class ArbolB {
 
     ArrayList<Node> root = new ArrayList();
+    ArrayList<Object> branches = new ArrayList();
     int orden;
     int keySize; //cuantos nodos pueden haber en un slot, que es el orden -1
 
@@ -62,16 +63,16 @@ public class ArbolB {
         Node hasLeftAuxNode = null;
         Node hasRightAuxNode = null;
         for (Node node : root) {
-            if (node.getId() < nuevo.getId()) {
+            if (node.getId() > nuevo.getId()) {
                 if (node.hasLeftSon) {
                     NodeGoesLeftSon = true;
-                    hasLeftAuxNode = node;
+                    hasLeftAuxNode = node; //guarda el valor del nodo para utilizarlo despues
                     break;
                 }
-            } else if (node.getId() > nuevo.getId()) {
+            } else if (node.getId() < nuevo.getId()) {
                 if (node.hasRightSon) {
                     NodeGoesRightSon = true;
-                    hasRightAuxNode = node;
+                    hasRightAuxNode = node; //guarda el valor del nodo para utilizarlo despues
                     break;
                 }
             }//fin else if
@@ -84,6 +85,15 @@ public class ArbolB {
                     ArbolB tree = new ArbolB(orden);
                     tree.setRoot(node.getLeftchildren());
                     tree.addNodeTree(nuevo.getId(), nuevo.getKey());
+                    if (node.getLeftchildren().size() == 1) { //Si se ha quedado solo con un hijo, este hijo debe subir a formar parte del padre
+                        for (Node temp : node.getLeftchildren().get(0).getRightchildren()) {
+                            node.Leftchildren = new ArrayList();
+                            node.setLeftchildren(temp);
+                        }
+                        InsertarAfterUnderSplit(node);
+
+                    }
+                    actualizarBranches();
                     seInserto = true;
                     break;
                 }
@@ -94,6 +104,14 @@ public class ArbolB {
                     ArbolB tree = new ArbolB(orden);
                     tree.setRoot(node.getRightchildren());
                     tree.addNodeTree(nuevo.getId(), nuevo.getKey());
+                    if (node.getRightchildren().size() == 1) { //Si se ha quedado solo con un hijo, este hijo debe subir a formar parte del padre
+                        for (Node temp : node.getRightchildren().get(0).getLeftchildren()) {
+                            node.Rightchildren = new ArrayList();
+                            node.setRightchildren(temp);
+                        }
+                        InsertarAfterUnderSplit(node);
+                    }
+                    actualizarBranches();
                     seInserto = true;
                     break;
                 }
@@ -101,14 +119,44 @@ public class ArbolB {
         } else if (root.size() == keySize) {//verifica si la root esta llena
             nuevo = new Node(id, key); //creamos el nuevo nodo
             splitAndInsert(nuevo);
+            actualizarBranches();
             seInserto = true;
         } else { //si el arrayList aun no se ha llenado
             root.add(new Node(id, key));
             sort();
+            actualizarBranches();
             seInserto = true;
         }
 
         return seInserto;
+    }
+
+    public void InsertarAfterUnderSplit(Node nodo) {
+        if (root.size() == keySize) {
+            splitAndInsert(nodo);
+            actualizarBranches();
+        } else {
+            root.add(nodo);
+            sort();
+            actualizarBranches();
+        }
+    }
+
+    public void actualizarBranches() {
+        branches = new ArrayList();
+        for (Node node : root) {
+            if (node.HasLeftSon()) {
+                if (!branches.contains(node.Leftchildren)) {
+                    branches.add(node.Leftchildren);
+                }
+
+            }
+            if (node.HasRightSon()) {
+                if (!branches.contains(node.Rightchildren)) {
+                    branches.add(node.Rightchildren);
+                }
+            }
+        }
     }
 
     //================================SPLIT AND INSERT=============================
@@ -121,7 +169,7 @@ public class ArbolB {
         if (pos % 2 != 0) { //obtener la mediana para hacer el split correspondiente
             pos++;
         }
-        
+
         Node newFather = temp2.get(pos); //se establece quien sera el nuevo padre de todos
         //Se declaran los hijos del nodo padre
         for (int i = 0; i < temp2.size(); i++) {
@@ -172,8 +220,30 @@ public class ArbolB {
 
     }
 
-    public int searchNode() {
+    public void printArbol() {
+
+    }
+
+    public int searchNode(int llaveBuscar, Node nodo, int orden) {
+        int s = 0;
+        
+        while (s < orden - 1) {
+            if (llaveBuscar == nodo.getKey()/*[s]*/) {
+                return nodo.getKey();
+            } else if (llaveBuscar < nodo.getKey()/*[s]*/) {
+                break;
+            } else {
+                s++;
+            }//Fin del if
+        }//Fin del while
+        /*
+        if (node.subtree[s]() != null) {
+            return searchNode(llaveBuscar, node.subtree[s], orden)
+        } else {
+            return -1;
+        }
+        */
         return 0;
     }//Fin del searchNode
-    
+
 }//Fin de la clase

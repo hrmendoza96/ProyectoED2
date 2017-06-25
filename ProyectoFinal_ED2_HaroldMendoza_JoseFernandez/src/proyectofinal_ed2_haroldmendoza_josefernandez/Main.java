@@ -1300,6 +1300,7 @@ public class Main extends javax.swing.JFrame {
         personas = tda.getListPersonas();
         for (Person persona : personas) {
             BTree.addNodeTree(persona.getId(), KeyRRN);
+            seCargo=true;
         }
         return seCargo;
     }
