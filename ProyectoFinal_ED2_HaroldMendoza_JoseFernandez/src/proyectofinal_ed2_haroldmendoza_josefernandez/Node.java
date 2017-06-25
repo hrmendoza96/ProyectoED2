@@ -15,10 +15,12 @@ public class Node {
     Node Father;
     ArrayList<Node> Leftchildren = new ArrayList();
     ArrayList<Node> Rightchildren = new ArrayList();
+    boolean hasFather;
     boolean hasLeftSon;
     boolean hasRightSon;
     int key;
     int id;
+    
 
     public Node() {
     }
@@ -33,6 +35,7 @@ public class Node {
     }
 
     public void setFather(Node Father) {
+        hasFather=true;
         this.Father = Father;
     }
 

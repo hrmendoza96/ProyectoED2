@@ -16,6 +16,7 @@ import java.util.Comparator;
 public class ArbolB {
 
     ArrayList<Node> root = new ArrayList();
+    ArrayList<Object> branches = new ArrayList();
     int orden;
     int keySize; //cuantos nodos pueden haber en un slot, que es el orden -1
 
@@ -62,16 +63,16 @@ public class ArbolB {
         Node hasLeftAuxNode = null;
         Node hasRightAuxNode = null;
         for (Node node : root) {
-            if (node.getId() < nuevo.getId()) {
+            if (node.getId() > nuevo.getId()) {
                 if (node.hasLeftSon) {
                     NodeGoesLeftSon = true;
-                    hasLeftAuxNode = node;
+                    hasLeftAuxNode = node; //guarda el valor del nodo para utilizarlo despues
                     break;
                 }
-            } else if (node.getId() > nuevo.getId()) {
+            } else if (node.getId() < nuevo.getId()) {
                 if (node.hasRightSon) {
                     NodeGoesRightSon = true;
-                    hasRightAuxNode = node;
+                    hasRightAuxNode = node; //guarda el valor del nodo para utilizarlo despues
                     break;
                 }
             }//fin else if
@@ -84,6 +85,10 @@ public class ArbolB {
                     ArbolB tree = new ArbolB(orden);
                     tree.setRoot(node.getLeftchildren());
                     tree.addNodeTree(nuevo.getId(), nuevo.getKey());
+                    if(node.getLeftchildren().size()==1){ //Si se ha quedado solo con un hijo, este hijo debe subir a formar parte del padre
+                        
+                        
+                    }
                     seInserto = true;
                     break;
                 }
@@ -94,6 +99,15 @@ public class ArbolB {
                     ArbolB tree = new ArbolB(orden);
                     tree.setRoot(node.getRightchildren());
                     tree.addNodeTree(nuevo.getId(), nuevo.getKey());
+                    if(node.getRightchildren().size()==1){ //Si se ha quedado solo con un hijo, este hijo debe subir a formar parte del padre
+                        for (Node temp : node.getRightchildren().get(0).getLeftchildren()) {
+                            node.Rightchildren = new ArrayList();
+                            node.setRightchildren(temp);
+                        }
+                        addNodeTree(node.getRightchildren().get(0).getId(), node.getRightchildren().get(0).getKey());
+                        
+                        
+                    }
                     seInserto = true;
                     break;
                 }
