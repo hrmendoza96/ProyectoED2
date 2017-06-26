@@ -186,7 +186,7 @@ public class ArbolB {
                 newFather.setLeftchildren(temp2.get(i));
             } else if (i > pos) {//hijo mayor
                 //System.out.println("mayor"+i);
-                temp2.get(i-1).setFather(newFather);
+                temp2.get(i).setFather(newFather);
                 newFather.setRightchildren(temp2.get(i));
             }
         }
@@ -230,16 +230,13 @@ public class ArbolB {
     }
 
     public void printArbol(ArrayList<Node> root) {
+        System.out.println("Root");
         for (Node node : root) {
             System.out.println(node.toString());
-            if(node.HasLeftSon()){
-                System.out.println("Left Sons of :"+node.getId());
-                printArbol(node.getLeftchildren());
-            }
-            if(node.HasRightSon()){
-                System.out.println("Right Sons of :"+node.getId());
-                printArbol(node.getRightchildren());
-            }
+        }
+        System.out.println("Branches: ");
+        for (Object x : branches) {  
+            System.out.println(x.toString());
         }
 
     }
