@@ -21,7 +21,7 @@ public class Main extends javax.swing.JFrame {
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         boolean cargo= cargarArbolB();
         System.out.println("Se cargo arbol B="+cargo);
-
+        //int prueba = 0;
     }//Fin del main
 
     @SuppressWarnings("unchecked")
